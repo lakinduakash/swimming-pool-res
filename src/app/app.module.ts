@@ -8,10 +8,12 @@ import {AngularFirestoreModule} from '@angular/fire/firestore';
 import {AngularFireAuthModule} from '@angular/fire/auth';
 import {environment} from '../environments/environment';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { AdminDashComponent } from './admin-dash/admin-dash.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    AdminDashComponent
   ],
   imports: [
     BrowserModule,
