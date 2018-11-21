@@ -9,6 +9,7 @@ import {AngularFireAuthModule} from '@angular/fire/auth';
 import {environment} from '../environments/environment';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AppRouteModule} from './route.module';
+import {UserSignInUpModule} from './signup-login/user-signin-up.module';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import {AppRouteModule} from './route.module';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
     AngularFireAuthModule,
+    UserSignInUpModule
   ],
   providers: [],
   bootstrap: [AppComponent]
