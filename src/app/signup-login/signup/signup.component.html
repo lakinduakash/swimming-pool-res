@@ -1,0 +1,108 @@
+<div class="container">
+  <mat-card [class.mat-elevation-z0]="isHandest$" [class.mat-elevation-z7]="!isHandest$" class="tr-card">
+
+    <div *ngIf="state==signupStates[3] || state==signupStates[0] || state==signupStates[1]">
+
+      <mat-card-title fxLayoutAlign="center">Signup-Project Evaluation System</mat-card-title>
+
+      <form [formGroup]="signupFormGroup" fxLayoutAlign="center" class="example-form"
+            (ngSubmit)="postData(signupFormGroup)">
+        <table class="example-full-width" cellspacing="0">
+
+          <tr>
+            <td>
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="First name" formControlName="fName" name="fName" required>
+              </mat-form-field>
+            </td>
+          </tr>
+          <tr>
+
+          <tr>
+            <td>
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="Last name" formControlName="lName" name="lName" required>
+              </mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="email" formControlName="email" name="username" required>
+
+
+              </mat-form-field>
+              <div class="error-text">
+                <mat-error *ngIf="state==signupStates[0]">Email already registered</mat-error>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <mat-form-field class="example-full-width">
+                <input [formGroup]="signupFormGroup" matInput placeholder="Password" formControlName="password"
+                       type="password" name="password" required>
+                <mat-hint *ngIf="signupFormGroup.controls.password.errors?.minLength">Password must be minimum 8
+                  characters
+                </mat-hint>
+                <mat-error>Password must be minimum 8 characters</mat-error>
+              </mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <mat-form-field class="example-full-width">
+                <input [formGroup]="signupFormGroup" matInput placeholder="Confirm password" formControlName="passwordc"
+                       type="password" name="passwordc" required>
+                <mat-error *ngIf="signupFormGroup.controls.passwordc.errors?.MatchPassword">Password not match
+                </mat-error>
+
+              </mat-form-field>
+            </td>
+          </tr>
+
+          <tr fxLayoutAlign="center">
+            <td>
+              <button mat-raised-button type="submit" [disabled]="signupFormGroup.invalid||showSpinner" color="primary">
+                Signup
+              </button>
+
+            </td>
+          </tr>
+
+          <tr fxLayoutAlign="center">
+            <td>
+
+
+              <div *ngIf="state==signupStates[1]">
+                <p style="color: red"> Some error occurred, retry </p>
+              </div>
+
+            </td>
+          </tr>
+        </table>
+
+
+      </form>
+
+    </div>
+
+    <div *ngIf="state==signupStates[2]">
+
+      <mat-card-title fxLayoutAlign="center">Verification email sent, check your mail box</mat-card-title>
+
+    </div>
+
+
+    <span></span>
+    <div class="login-bottom" fxLayoutAlign="center">
+      <p fxLayoutAlign="right"><a routerLink="/login">Login</a></p>
+    </div>
+
+    <div class="pr-container">
+      <mat-progress-bar mode="indeterminate" [style.display]="showSpinner ? 'block' : 'none'"></mat-progress-bar>
+    </div>
+  </mat-card>
+
+
+</div>

@@ -1,0 +1,84 @@
+<div class="container">
+  <mat-card [class.mat-elevation-z0]="isHandest$" [class.mat-elevation-z7]="!isHandest$" class="tr-card">
+
+    <div *ngIf="!inFogotFassword">
+      <mat-card-title fxLayoutAlign="center">Login- Project Evaluation System</mat-card-title>
+
+      <form fxLayoutAlign="center" class="example-form">
+        <table class="example-full-width" cellspacing="0">
+          <tr>
+            <td>
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="Email" [(ngModel)]="email" name="email" type="email" required>
+              </mat-form-field>
+
+              <mat-error>{{emailVerifiedStatus}}</mat-error>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="Password" [(ngModel)]="password" type="password" name="password" required>
+              </mat-form-field>
+            </td>
+          </tr>
+        </table>
+      </form>
+
+      <div fxLayoutAlign="center" class="error-text">
+        <mat-error>{{errorMassage}}</mat-error>
+      </div>
+
+
+      <mat-card-actions fxLayoutAlign="center">
+
+        <button [disabled]="showSpinner" mat-raised-button (click)="login()" color="primary">Login</button>
+      </mat-card-actions>
+
+      <div class="login-bottom" fxLayoutAlign="center">
+        <p fxFlexAlign="left"><a routerLink="/signup"> Signup</a></p>
+      </div>
+      <span></span>
+      <div class="login-bottom" fxLayoutAlign="center">
+        <button class="fps" mat-flat-button (click)="forgotPasswordClick()">Forgot password?</button>
+
+      </div>
+
+    </div>
+
+    <div *ngIf="inFogotFassword" [@flyInOut]>
+
+      <mat-card-title fxLayoutAlign="center">Enter your email</mat-card-title>
+      <form fxLayoutAlign="center" class="example-form">
+        <table class="example-full-width" cellspacing="0">
+          <tr>
+            <td>
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="email" [(ngModel)]="email" name="femail" required>
+              </mat-form-field>
+            </td>
+          </tr>
+        </table>
+      </form>
+
+      <div style="margin: 1px" fxLayoutAlign="center">
+        <p [style.color]="!successResetSend? 'red' :'black'">{{emailSentMassage}}</p>
+      </div>
+
+      <div class="button-container" fxLayoutAlign="center">
+        <button mat-flat-button (click)="sendRecoveryMail()">Send email</button>
+      </div>
+
+      <div class="button-container back" fxLayoutAlign="center">
+        <button mat-flat-button (click)="back()">Back</button>
+
+      </div>
+    </div>
+
+    <div class="pr-container">
+      <mat-progress-bar mode="indeterminate" [style.display]="showSpinner ? 'block' : 'none'"></mat-progress-bar>
+    </div>
+
+  </mat-card>
+
+</div>
