@@ -1,7 +1,7 @@
 import {UserSignInUpModule} from './user-signin-up.module';
 
 
-describe('EvalSigninUpModule', () => {
+describe('EvalSignInUpModule', () => {
   let evalSigninUpModule: UserSignInUpModule;
 
   beforeEach(() => {
