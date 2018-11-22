@@ -1,0 +1,20 @@
+/*------------------------------------------------------------------------------
+
+Template:  Swimmer-Swimming School HTML Template
+Author: 
+Version: 1
+Design and Developed by: 
+
+Note: This core style file includes all external plugins css file.
+
+-------------------------------------------------------------------------------*/
+
+@import url("font-awesome.min.css");
+@import url("material-design-iconic-font.min.css");
+@import url("plugins/meanmenu.min.css");
+@import url("plugins/animate.css");
+@import url("plugins/jquery-ui.min.css");
+@import url("plugins/owl.carousel.css");
+@import url("plugins/slick.css");
+@import url("plugins/owl.carousel.css");
+@import url("plugins/magnific-popup.css");

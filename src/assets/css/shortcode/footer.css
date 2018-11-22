@@ -1,0 +1,126 @@
+/* -----------------------------------
+Template: Swimmer-Swimming School HTML Template
+
+NOTE: This is Footer style file. All footer related style included in this file.
+
+--------------------------------------*/
+.footer-area{
+    background-color: #F6F6F6;
+}
+.main-footer .col-md-4:last-child .footer-widget {
+  padding-left: 150px;
+}
+.main-footer .col-md-4:first-child .footer-widget{margin-right: 100px}
+.footer-widget h3{
+    font-size: 24px;
+    color: #666666;
+    margin-bottom: 25px;
+    display: block;
+    font-family: 'Lobster', cursive;
+}
+.footer-widget h5{
+    font-size: 12px;
+    color: #666;
+    font-family: 'Roboto', sans-serif;
+}
+.footer-widget h5 span{float: right}
+.footer-widget p{
+    color: #444444;
+    font-size: 14px;
+    margin-bottom: 0;
+    margin-top: 10px;
+}
+.footer-widget.text-center p{margin-top: 25px; margin-bottom: 25px; line-height: 20px}
+.footer-widget .logo{
+    margin-bottom: 40px;
+    display: block;
+}
+.footer-widget p a{color: #0148bc}
+.footer-icons ul{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.footer-icons ul li{
+    display: inline-block;
+    margin: 0 4px;
+    border-radius: 50%;
+    height: 30px;
+    width: 30px;
+    border: 1px solid transparent;
+    -webkit-transition: all 0.5s ease 0s;
+    -o-transition: all 0.5s ease 0s;
+    transition: all 0.5s ease 0s;
+}
+.post-img{
+    display: inline-block;
+    overflow: hidden;
+}
+.footer-icons ul li i{
+    color: #fff;
+    line-height: 28px;
+}
+.footer-icons ul li:hover i{
+    color: #fff;
+}
+.footer-icons ul li:first-child{
+    background: #0148BC;
+}
+.footer-icons ul li:first-child:hover{
+    background: transparent;
+    border: 1px solid #0148BC;
+}
+.footer-icons ul li:first-child:hover i{
+    color: #0148BC;
+}
+.footer-icons ul li:nth-child(2){
+    background: #1C9DEC;
+}
+.footer-icons ul li:nth-child(2):hover{
+    background: transparent;
+    border: 1px solid #1C9DEC;
+}
+.footer-icons ul li:nth-child(2):hover i{
+    color: #1C9DEC;
+}
+.footer-icons ul li:nth-child(3){
+    background: #EA4335;
+}
+.footer-icons ul li:nth-child(3):hover{
+    background: transparent;
+    border: 1px solid #EA4335;
+}
+.footer-icons ul li:nth-child(3):hover i{
+    color: #EA4335;
+}
+.footer-icons ul li:nth-child(4){
+    background: #0177B5;
+}
+.footer-icons ul li:nth-child(4):hover{
+    background: transparent;
+    border: 1px solid #0177B5;
+}
+.footer-icons ul li:nth-child(4):hover i{
+    color: #0177B5;
+}
+.footer-icons ul li:nth-child(5){
+    background: #CB1F27;
+}
+.footer-icons ul li:nth-child(5):hover{
+    background: transparent;
+    border: 1px solid #CB1F27;
+}
+.footer-icons ul li:nth-child(5):hover i{
+    color: #CB1F27;
+}
+.footer-bottom{
+    background-color: #0148BC;
+    padding: 10px 0 10px;
+}
+.footer-bottom p, .footer-bottom a{
+    margin: 0;
+    color: #fff;
+    font-size: 12px;
+    font-family: 'Roboto', sans-serif;
+}
+.footer-bottom p a:hover{text-decoration: underline}

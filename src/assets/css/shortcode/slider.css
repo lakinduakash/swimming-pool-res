@@ -1,0 +1,193 @@
+/* -----------------------------------
+Template Name: Swimmer-Swimming School HTML Template
+Template URI: www.bootitems.com
+Description: This is a multipurpose html5 template
+Author URI: www.bootitems.com
+Version: 1.0  
+
+NOTE: This is Slider style file. All Slider related style included in this file.
+-----------------------------------------------------------------------------------
+CSS INDEX
+===================
+   1. Default Slider Settings
+--------------------------------------*/
+/*===========================================
+   1. Default Slider Settings
+=============================================*/
+#slider-container{height: 650px}
+#slider-container div{height: 100%}
+.owl-item{width: 34%}
+#slider-container .owl-wrapper-outer,
+#slider-container .owl-wrapper,
+#slider-container .owl-item{
+	position: relative;
+	width: 100%;
+}
+.slider-content-area{
+	display: block;
+	left: 0;
+	overflow: hidden;
+	position: absolute;
+	top: 0;
+	width: 100%;
+}
+.single-slide {
+	position: relative;
+	width: 100%;
+    background-repeat: no-repeat; 
+    background-attachment: scroll; 
+    background-position: top center; 
+    background-size: cover;
+}
+.single-slide:after {
+	position: absolute;
+	width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background: rgba(0, 0, 0, 0.5);
+    content: "";
+}
+.single-slide > a {
+	display: block;
+	position: relative;
+}
+.single-slide img {
+	width: 100%;
+	z-index: 1;
+}
+.dis-table{
+	display: table;
+	float: left;
+	width: 100%;	
+}
+.dis-table-cell{
+	display: table-cell;
+	vertical-align: middle;	
+}
+/* Slider Content Style */
+.slider-content, .home-banner-content, .fixed-content {
+    position: relative;
+    z-index: 20;
+}
+.slide-content h3 {
+	font-size: 30px;
+	line-height: 30px;
+	position:relative;
+    font-family: 'Lobster', cursive;
+    margin-bottom: 3px;
+    color: #fff;
+    text-transform: lowercase;
+}
+.slide-content h1, .home-banner-content h1 {
+	font-size: 40px;
+	line-height: 70px;
+	position:relative;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    color: #fff;
+    text-transform: uppercase;
+}
+.slide-content p {
+	font-size: 14px;
+	line-height: 14px;
+	position:relative;
+    font-family: 'Roboto', sans-serif;
+    color: #fff;
+}
+.slide-content .btn, .read-more {
+    color: #fff;
+    display: inline-block;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    margin-top: 15px;
+    padding: 9px 30px 9px;
+    border-radius: 0px;
+    font-weight: 700;
+    text-transform: capitalize;
+    position: relative;
+    -webkit-transition: all 0.5s ease 0s;
+    transition: all 0.5s ease 0s;
+}
+.slide-content .btn::before {
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  content: "";
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  transition: all 0.3s ease 0s;
+  width: 100%;
+  z-index: 1;
+}
+.slide-content .btn::after {
+  background-color: rgba(255, 255, 255, 0.25);
+  content: "";
+  height: 100%;
+  left: 0;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  transform: scale(0.5, 0.5);
+  transition: all 0.3s ease 0s;
+  width: 100%;
+  z-index: 1;
+}
+.slide-content .btn:hover::before {
+  opacity: 0;
+  transform: scale(1.2, 1.2);
+}
+.slide-content .btn:hover::after {
+  opacity: 1;
+  transform: scale(1, 1);
+}
+.hs-item .hs-content * {
+  animation-duration: 1.5s;
+  animation-fill-mode: both;
+}
+/* Default Slider Animations */
+.owl-item.active .slide-content h3{
+       animation-delay: .5s;
+    animation-name: fadeInUp;
+}
+.owl-item.active .slide-content h1, .home-banner-content h1{
+         animation-delay: 1s;
+    animation-name: fadeInUp;
+}
+.owl-item.active .slider-content p{
+        animation-delay: 1.8s;
+    animation-name: fadeInUp;
+}
+.owl-item.active .slider-content a.btn, .home-banner-content a.btn{
+    animation-delay: 2s;
+    animation-name: fadeInUp;
+}
+.owl-nav div{
+    background: #fff none repeat scroll 0 0;
+    color: #0148BC;
+    font-size: 30px;
+    height: 40px;
+    left: -46px;
+    margin-top: -20px;
+    position: absolute;
+    text-align: center;
+    top: 50%;
+    line-height: 43px;
+    width: 35px;
+    z-index: 999;
+    -webkit-transition: all 0.4s ease 0s;
+    transition: all 0.4s ease 0s
+}
+.owl-nav .owl-next {left: auto; right: -46px;}
+.slider-area:hover .owl-nav div{
+    left: 0;
+}
+.slider-area:hover .owl-nav .owl-next {
+    left: auto; 
+    right: 0;
+}
+.owl-nav div:hover{background: rgba(1, 72, 188, 0.5); color: #fff}
+.owl-controls, .owl-controls div{height: auto}
+#slider-container .owl-controls, #slider-container .owl-controls div {
+  height: 40px;
+}

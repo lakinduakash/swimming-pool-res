@@ -1,0 +1,187 @@
+/* Large desktop :1920px. */
+@media (min-width: 1501px) and (max-width: 2300px) {
+    .appoint-right h2 {font-size: 50px}
+    .appoint-right h3 {font-size: 36px}
+    .appoint-right{padding: 80px 150px}
+    .appoint-right h3 { margin-bottom: 30px}
+    
+}
+
+/* Normal desktop :1200px. */
+@media (min-width: 1201px) and (max-width: 1500px) {
+/*    .container, .wrapper.boxed-layout, .wrapper.boxed-layout .sticky, .wrapper.box-layout, .wrapper.box-layout .sticky {width: 1170px}*/
+}
+
+/* Normal desktop :992px. */
+@media (min-width: 992px) and (max-width: 1200px) {
+    .container, .wrapper.boxed-layout, .wrapper.boxed-layout .sticky, .wrapper.box-layout, .wrapper.box-layout .sticky {width: 970px}
+    .mobile-menu-area {display: block}
+    .slide-content h1, .home-banner-content h1 {font-size: 70px;line-height: 70px}
+	.class-left > button {margin-bottom: 20px}
+    .portfolio-hover p, .appoint-right h3, .inst-content > p, .single-class:hover .class-content h6, .heading-p {display: none}
+    .blog-content h3 { margin-bottom: 0px}
+    .blog-content h3 a, .inst-content h5 { font-size: 13px}
+    .blog-content p {font-size: 12px}
+    #slider-container {height: 500px}
+    .appoint-right.pt-80.pb-80.pr-150.pl-150.text-center {padding: 80px}
+    .main-footer .col-md-4:last-child .footer-widget {padding-left: 65px}
+    .slide-content h1, .home-banner-content h1 {font-size: 50px; line-height: 50px}
+    .appoint-right h2 {font-size: 22px; margin-bottom: 15px}
+    .appoint-right.pt-20.pb-20.pr-100.pl-100{padding-right: 30px; padding-left: 30px}
+    .inst-content {height: 34%}
+    .inst-content ul li {margin: 0 6px}
+    .single-instructor:hover .inst-content {height: 45%}
+    .grid-item:nth-child(2), .grid-item:nth-child(3) {margin-bottom: 23px}
+    .blog-content > a{margin-bottom: 0}
+    .subscribe-form input {width: 322px}
+}
+ 
+/* Tablet desktop :768px. */
+@media (min-width: 768px) and (max-width: 991px) {
+    .container, .wrapper.boxed-layout, .wrapper.box-layout {width:750px}
+    .mobile-menu-area {display: block}
+    .header-top, .footer-icons, .hover-content p, .hover-content h4, .inst-content > p, .contact-left-wrapper{display: none;}
+    .wrapper.boxed-layout .sticky, .wrapper.box-layout .sticky {width: 750px;}
+    .inst-content {height: 38%}
+    .inst-content ul li {margin: 0 6px}
+    .subscribe-form input {width: 460px}
+    .single-instructor:hover .inst-content {height: 45%}
+    .sticky {position: inherit;} 
+    .class-left {padding: 0px}
+    .heading-p { display: none}
+    .class-left > button{margin-bottom: 10px}
+    .testimonial-content.text-center.pt-75.pb-80.mt-80.mb-80 {padding: 50px 30px}
+    #slider-container {height: 530px}
+    .appoint-left, .appoint-right, .contact-right{width: 100%}
+    .appoint-left{margin-bottom: 30px}
+    .grid-item:nth-child(2), .grid-item:nth-child(3) {margin-bottom: 15px}
+    .inst-content.pl-30.pr-30 {padding-left: 20px; padding-right: 20px}
+    .remind {margin-bottom: 30px}
+    .testimonial-content {padding-bottom: 50px; padding-top: 50px}
+	
+}
+    
+/* small mobile :320px. */
+@media (max-width: 767px) {
+    .container, .wrapper.boxed-layout, .wrapper.box-layout {width:300px}
+    .mobile-menu-area {display: block;}
+    #sticky-header, .wrapper.boxed-layout #sticky-header, .wrapper.box-layout #sticky-header, #sticky-header.fixed {position: inherit;}
+    #sticky-header, .category-img > img, .blog-img > img, .grid-item, .portfolio-img img, .grid-item:nth-child(3), .appoint-left, .appoint-right, .contact-right{width: 100%}
+    .appoint-right{padding-left: 20px; padding-right: 20px;}
+    .logo {text-align: center;}
+    .appoint-right h2 {font-size: 35px}
+    .sticky .logo img {width: auto;}
+    .single-class{margin-bottom: 100px}
+    .panel-middle, .panel-left {font-size: 13px}
+    .category-area .col-md-4, .contact-area .single-contact, .footer-widget, .single-blog, .single-fun, .single-price, .grid-item, .appoint-left, .remind  {margin-bottom: 30px}  
+    .col-md-4:last-child .single-blog, .col-md-4:last-child .single-price, .col-md-4:last-child .single-class{margin-bottom: 0}
+    .main-footer .col-md-4:last-child .footer-widget, .col-md-3:last-child .single-fun {padding-left: 0px; margin-bottom: 0;}
+    .testimonial-content {padding-left: 30px; padding-right: 30px; padding-top: 30px; padding-bottom: 30px}
+    .panel-heading span:first-child {width: 40%}
+    .panel-heading span:last-child {width: 25%}
+    .panel-left {margin-top: 5px}
+    .register-form.mt-80.mb-80 {padding: 20px}
+    .register-form a.submit {width: 230px}
+    .panel-left img {float: inherit}
+    #navigation {
+        background-color: #000000;
+        border-bottom: 1px solid #e7e7e7;
+        border-top: 1px solid #e7e7e7;
+        display: none;
+        height: auto;
+        left: 0;
+        overflow: auto;
+        position: relative;
+        top: 0px;
+        width: 100%;
+        z-index: 99;
+    }
+    #navigation.main-menu ul li a {
+      color: #fff;
+      padding: 10px 22px;
+        -webkit-transition: all 0.5s ease 0s;
+        -o-transition: all 0.5s ease 0s;
+        transition: all 0.5s ease 0s;
+    }
+    .main-menu ul li::before, .main-menu ul li::after{display: none}
+    #topnav .navigation-menu {float: none; max-height: 400px}
+    .menu-area {
+      display: inherit;
+      float: none;
+      position: relative;
+      top: -42px;
+    }
+    .stick .menu-area{top: -38px}
+    .stick .logo {padding: 15px 0 0}
+    .main-menu ul > li ul.submenu {
+        display: none;
+        list-style: outside none none;
+        margin: 0;
+        padding-left: 20px;
+        position: inherit;
+        width: 100%;
+    }
+    .main-menu ul > li ul.submenu.open {display: block; opacity: 1; visibility: visible}
+    .main-menu ul li {display: block; margin-bottom: 1px}
+    .main-menu ul li ul.submenu.megamenu > li {width: 100%}
+    .main-menu ul li ul.submenu.megamenu {white-space: inherit}
+    .main-menu ul li a i {float: right}
+    .main-menu ul li ul.submenu.open {background-color: #000; top: 0px}
+    .main-menu ul li:hover a, .main-menu ul li ul.submenu li a, .main-menu ul li ul.submenu li:hover > a, .main-menu ul li ul.submenu.megamenu > li:hover > a{color: #fff}
+    #topnav .navbar-toggle {
+      border: 0 none;
+      cursor: pointer;
+      margin: 0;
+      padding: 10px 7px;
+      position: relative;
+      width: 40px;
+    }
+    .logo {
+      padding: 34px 0 0;
+    }
+    #topnav .navbar-toggle .lines {
+        display: block;
+        height: 15px;
+        position: relative;
+        width: 25px;
+    }
+    #topnav .navbar-toggle span {
+        background-color: #fff;
+        display: block;
+        height: 1px;
+        margin-bottom: 5px;
+        transition: transform 0.5s ease 0s, -webkit-transform 0.5s ease 0s;
+        width: 100%;
+    }
+    #topnav .navbar-toggle.open span {position: absolute}
+    #topnav .navbar-toggle span {background-color: #191b1d}
+    #topnav .navbar-toggle span:last-child {
+        margin-bottom: 0;
+        width: 75%;
+    }
+    #topnav .navbar-toggle.open span:nth-child(2) {visibility: hidden}
+    #topnav .navbar-toggle.open span:last-child {top: 6px; transform: rotate(-45deg); width: 100%}
+    #topnav .navbar-toggle.open span:first-child {top: 6px; transform: rotate(45deg)}
+    .menu-item {border: 1px solid #ddd; float: right}
+    .slide-content h1, .home-banner-content h1 {font-size: 20px;line-height: 30px}
+    .slide-content p, .testimonial-owl .owl-controls, .contact-left-wrapper{display: none}
+    #slider-container {height: 400px}  
+    #navigation.main-menu ul li{padding: 0px 0}
+    .subscribe-form input {width: 138px}
+    .welcome-content h2 {font-size: 25px}
+    .welcome-content h3 {font-size: 20px}
+}
+ 
+/* Large Mobile :480px. */
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+    .container {width:450px}
+    .wrapper.boxed-layout, .wrapper.box-layout {width:450px}
+    .subscribe-form input {width: 288px}
+    .welcome-content h2 {font-size: 35px}
+    .welcome-content h3 {font-size: 25px}
+    .inst-content {height: 16%}
+    .single-instructor:hover .inst-content {height: 33%}
+    .post .post-img:nth-child(2){margin-right: 16px}
+    .post .post-img:nth-child(3){margin-bottom: 10px}
+    .post .post-img:last-child{display: none}
+}
