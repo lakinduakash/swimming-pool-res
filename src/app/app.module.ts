@@ -12,6 +12,7 @@ import {AppRouteModule} from './route.module';
 import {UserSignInUpModule} from './signup-login/user-signin-up.module';
 import {ButtonsModule, CarouselModule, MDBBootstrapModule, WavesModule} from 'angular-bootstrap-md';
 import { HomeComponent } from './home/home.component';
+import {MatButtonModule} from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { HomeComponent } from './home/home.component';
     MDBBootstrapModule.forRoot(),
     CarouselModule,
     WavesModule,
-    ButtonsModule
+    ButtonsModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
