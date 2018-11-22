@@ -5,13 +5,14 @@ import {LoginComponent} from './signup-login/login/login.component';
 import {SignupComponent} from './signup-login/signup/signup.component';
 import {AppComponent} from './app.component';
 import {AuthGuard} from './core/auth/auth.guard';
+import {HomeComponent} from './home/home.component';
 
 
 const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
   {path: 'login', component: LoginComponent},
   {path: 'signup', component: SignupComponent},
-  {path: 'home', component: AppComponent}
+  {path: 'home', component: HomeComponent}
   ];
 
 @NgModule({

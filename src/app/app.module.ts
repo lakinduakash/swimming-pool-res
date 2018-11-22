@@ -11,10 +11,12 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AppRouteModule} from './route.module';
 import {UserSignInUpModule} from './signup-login/user-signin-up.module';
 import {ButtonsModule, CarouselModule, MDBBootstrapModule, WavesModule} from 'angular-bootstrap-md';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
