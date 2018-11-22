@@ -10,6 +10,7 @@ import {environment} from '../environments/environment';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AppRouteModule} from './route.module';
 import {UserSignInUpModule} from './signup-login/user-signin-up.module';
+import {ButtonsModule, CarouselModule, MDBBootstrapModule, WavesModule} from 'angular-bootstrap-md';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,11 @@ import {UserSignInUpModule} from './signup-login/user-signin-up.module';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
     AngularFireAuthModule,
-    UserSignInUpModule
+    UserSignInUpModule,
+    MDBBootstrapModule.forRoot(),
+    CarouselModule,
+    WavesModule,
+    ButtonsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
