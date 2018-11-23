@@ -14,17 +14,3 @@ header,
   }
 }
 
-.top-nav-collapse {
-  background-color: #f8bbd0 !important;
-}
-
-.navbar:not(.top-nav-collapse) {
-  background: transparent !important;
-}
-
-@media (max-width: 991px) {
-  .navbar:not(.top-nav-collapse) {
-    background: #f8bbd0 !important;
-  }
-}
-
