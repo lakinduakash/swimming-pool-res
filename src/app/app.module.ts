@@ -12,16 +12,20 @@ import {AppRouteModule} from './route.module';
 import {UserSignInUpModule} from './signup-login/user-signin-up.module';
 import {ButtonsModule, CarouselModule, MDBBootstrapModule, NavbarModule, WavesModule} from 'angular-bootstrap-md';
 import {HomeComponent} from './home/home.component';
-import {MatButtonModule} from '@angular/material';
+import {DateAdapter, MatButtonModule} from '@angular/material';
 import {UserProfileComponent} from './user-profile/user-profile.component';
 import {ContactComponent} from './contact-component/contact.component';
+import {CalendarModule} from 'angular-calendar';
+import {adapterFactory} from 'angular-calendar/date-adapters/date-fns';
+import {EventCalComponent} from './event-cal/event-cal.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     UserProfileComponent,
-    ContactComponent
+    ContactComponent,
+    EventCalComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +41,11 @@ import {ContactComponent} from './contact-component/contact.component';
     WavesModule,
     ButtonsModule,
     MatButtonModule,
-    NavbarModule
+    NavbarModule,
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]
