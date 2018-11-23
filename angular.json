@@ -26,7 +26,8 @@
               "src/styles.css",
               {"input": "node_modules/@angular/material/prebuilt-themes/indigo-pink.css"},
               "node_modules/angular-bootstrap-md/scss/bootstrap/bootstrap.scss",
-              "node_modules/angular-bootstrap-md/scss/mdb-free.scss"
+              "node_modules/angular-bootstrap-md/scss/mdb-free.scss",
+              "node_modules/angular-calendar/css/angular-calendar.css"
             ],
             "scripts": []
           },
