@@ -1,29 +1,30 @@
-.navBar
-{
-  min-width: 100%;
-  padding-left: 0;
-  padding-right: 0;
+html,
+body,
+header,
+.view {
+  height: 100%;
 }
 
-.nav-row
-{
-  position: fixed;
-  z-index: 999;
-  min-width: 100%;
-  box-shadow: 0 10px 10px rgba(96, 96, 96, 0.31);
-  background-color: rgba(241, 241, 241, 0.38);
+@media (max-width: 740px) {
+  html,
+  body,
+  header,
+  .view {
+    height: 100vh;
+  }
 }
 
-.nav-link{
-  color: black;
+.top-nav-collapse {
+  background-color: #f8bbd0 !important;
 }
 
-.in-car
-{
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  font-size: large;
-  z-index: 1000;
+.navbar:not(.top-nav-collapse) {
+  background: transparent !important;
+}
+
+@media (max-width: 991px) {
+  .navbar:not(.top-nav-collapse) {
+    background: #f8bbd0 !important;
+  }
 }
 
