@@ -12,12 +12,15 @@ import {AppRouteModule} from './route.module';
 import {UserSignInUpModule} from './signup-login/user-signin-up.module';
 import {ButtonsModule, CarouselModule, MDBBootstrapModule, NavbarModule, WavesModule} from 'angular-bootstrap-md';
 import {HomeComponent} from './home/home.component';
-import {DateAdapter, MatButtonModule} from '@angular/material';
+import {MatButtonModule} from '@angular/material';
 import {UserProfileComponent} from './user-profile/user-profile.component';
 import {ContactComponent} from './contact-component/contact.component';
-import {CalendarModule} from 'angular-calendar';
+import {CalendarModule, DateAdapter} from 'angular-calendar';
 import {adapterFactory} from 'angular-calendar/date-adapters/date-fns';
 import {EventCalComponent} from './event-cal/event-cal.component';
+import {FormsModule} from '@angular/forms';
+import {NgbModalModule} from '@ng-bootstrap/ng-bootstrap';
+import {FlatpickrModule} from 'angularx-flatpickr';
 
 @NgModule({
   declarations: [
@@ -42,6 +45,9 @@ import {EventCalComponent} from './event-cal/event-cal.component';
     ButtonsModule,
     MatButtonModule,
     NavbarModule,
+    FormsModule,
+    NgbModalModule,
+    FlatpickrModule.forRoot(),
     CalendarModule.forRoot({
       provide: DateAdapter,
       useFactory: adapterFactory
