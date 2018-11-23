@@ -1,3 +1,48 @@
 mdb-carousel{
   min-width: 100%;
 }
+
+#homeHeadSection{
+  height: 100vh;
+}
+
+/* Required for full background image */
+
+html,
+body,
+header,
+.view {
+  height: 100%;
+}
+
+@media (max-width: 740px) {
+  html,
+  body,
+  header,
+  .view {
+    height: 100vh;
+  }
+}
+
+.top-nav-collapse {
+  background-color: #f8bbd0 !important;
+}
+
+.navbar:not(.top-nav-collapse) {
+  background: transparent !important;
+}
+
+@media (max-width: 991px) {
+  .navbar:not(.top-nav-collapse) {
+    background: #f8bbd0 !important;
+  }
+}
+
+#packageSection{
+  height: 100vh;
+  margin-top: 13%;
+}
+
+/*#testimonials{*/
+  /*height: 100vh;*/
+/*}*/

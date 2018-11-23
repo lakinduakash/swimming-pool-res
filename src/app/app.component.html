@@ -2,46 +2,36 @@
 <div class="nav-row">
 
   <!-- Grid column -->
-  <div class="col-md-2 navBar">
-
-    <ul class="nav lighten-4 py-4 font-weight-bold">
-      <li class="nav-item">
-        <a class="nav-link active" href="#!">Active</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#!">Link</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#!">Link</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#!">Disabled</a>
-      </li>
-    </ul>
-
-  </div>
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top scrolling-navbar">
+    <div class="container">
+      <a class="navbar-brand" href="#"><strong>MDB</strong></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-7"
+              aria-controls="navbarSupportedContent-7" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent-7">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Link</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Profile</a>
+          </li>
+        </ul>
+        <form class="form-inline">
+          <div class="md-form mt-0">
+            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+          </div>
+        </form>
+      </div>
+    </div>
+  </nav>
   <!-- Grid column -->
 </div>
-<!-- Grid row -->
 
-<!--Carousel Wrapper-->
-<mdb-carousel [isControls]="true" [animation]="'slide'">
-  <!--First slide-->
-  <mdb-carousel-item>
-    <img class="d-block w-100" src="https://mdbootstrap.com/img/Photos/Slides/img%20(130).jpg" alt="First slide">
-  </mdb-carousel-item>
-  <!--/First slide-->
-  <!--Second slide-->
-  <mdb-carousel-item>
-    <img class="d-block w-100" src="https://mdbootstrap.com/img/Photos/Slides/img%20(129).jpg" alt="Second slide">
-  </mdb-carousel-item>
-  <!--/Second slide-->
-  <!--Third slide-->
-  <mdb-carousel-item>
-    <img class="d-block w-100" src="https://mdbootstrap.com/img/Photos/Slides/img%20(70).jpg" alt="Third slide">
-  </mdb-carousel-item>
-  <!--/Third slide-->
-  <button mat-raised-button class="in-car"> Click </button>
-</mdb-carousel>
-<!--/.Carousel Wrapper-->
+<app-home></app-home>
+
 
