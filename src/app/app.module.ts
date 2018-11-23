@@ -21,6 +21,7 @@ import {EventCalComponent} from './event-cal/event-cal.component';
 import {FormsModule} from '@angular/forms';
 import {NgbModalModule} from '@ng-bootstrap/ng-bootstrap';
 import {FlatpickrModule} from 'angularx-flatpickr';
+import {ServicesModule} from './services/services.module';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import {FlatpickrModule} from 'angularx-flatpickr';
     CalendarModule.forRoot({
       provide: DateAdapter,
       useFactory: adapterFactory
-    })
+    }),
+    ServicesModule
   ],
   providers: [],
   bootstrap: [AppComponent]
