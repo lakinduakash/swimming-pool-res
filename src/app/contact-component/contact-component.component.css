@@ -1,0 +1,45 @@
+#contactUsSection{
+  background: whitesmoke;
+}
+
+form{
+  margin-left: 200px;
+}
+
+#submitButton{
+  float: right;
+  margin-bottom: 20px;
+}
+
+h2{
+  color: rgb(66, 133, 244);
+}
+
+hr{
+  width: 70%;
+  border-width: 2px;
+  border-color:rgb(66, 133, 244) ;
+}
+
+#contactDetails{
+  margin-left: -50px;
+}
+
+@media only screen and (max-width: 768px) {
+  form{
+    margin-left: 10%;
+    margin-right: 10%;
+  }
+
+  #submitButton{
+    float: left;
+    margin-left: 10%;
+  }
+  #contactUsSection{
+    background: none;;
+  }
+
+  #contactDetails{
+    margin-left: 0;
+  }
+}

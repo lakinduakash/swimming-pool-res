@@ -14,12 +14,14 @@ import {ButtonsModule, CarouselModule, MDBBootstrapModule, WavesModule} from 'an
 import { HomeComponent } from './home/home.component';
 import {MatButtonModule} from '@angular/material';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { ContactComponentComponent } from './contact-component/contact-component.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    ContactComponentComponent
   ],
   imports: [
     BrowserModule,
