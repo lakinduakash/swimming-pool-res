@@ -7,3 +7,7 @@
 body {
   margin: 0;
 }
+
+.fixed-top {
+  z-index: 600 !important;
+}
