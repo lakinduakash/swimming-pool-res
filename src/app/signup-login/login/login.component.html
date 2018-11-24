@@ -1,28 +1,49 @@
-<div class="container">
-  <mat-card [class.mat-elevation-z0]="isHandest$" [class.mat-elevation-z7]="!isHandest$" class="tr-card">
+
 
     <div *ngIf="!inFogotFassword">
-      <mat-card-title fxLayoutAlign="center">Login- Project Evaluation System</mat-card-title>
 
-      <form fxLayoutAlign="center" class="example-form">
-        <table class="example-full-width" cellspacing="0">
-          <tr>
-            <td>
+
+      <h2 class="h1-responsive" fxLayoutAlign="center">Login</h2>
+      <hr>
+
+      <div fxLayoutAlign="center" style="margin-bottom: 20px">
+        <div class="google-btn">
+          <div class="google-icon-wrapper">
+            <img class="google-icon" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"/>
+          </div>
+          <p class="btn-text"><b>Sign in with google</b></p>
+        </div>
+      </div>
+
+      <div style="display: block" fxLayoutAlign="center">
+        <button class="loginBtn loginBtn--facebook">
+          Login with Facebook
+        </button>
+      </div>
+
+
+      <h2 class="h4-responsive" style="margin:20px 0 20px 0 " fxLayoutAlign="center">Or</h2>
+
+      <form fxLayoutAlign="center">
+
+        <div class="container">
+          <div class="row">
+
+            <div class="col-sm-12">
               <mat-form-field class="example-full-width">
                 <input matInput placeholder="Email" [(ngModel)]="email" name="email" type="email" required>
               </mat-form-field>
 
               <mat-error>{{emailVerifiedStatus}}</mat-error>
-            </td>
-          </tr>
-          <tr>
-            <td>
+            </div>
+
+            <div class="col-sm-12">
               <mat-form-field class="example-full-width">
                 <input matInput placeholder="Password" [(ngModel)]="password" type="password" name="password" required>
               </mat-form-field>
-            </td>
-          </tr>
-        </table>
+            </div>
+          </div>
+        </div>
       </form>
 
       <div fxLayoutAlign="center" class="error-text">
@@ -79,6 +100,3 @@
       <mat-progress-bar mode="indeterminate" [style.display]="showSpinner ? 'block' : 'none'"></mat-progress-bar>
     </div>
 
-  </mat-card>
-
-</div>
