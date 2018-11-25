@@ -121,7 +121,7 @@
 
   <div class="row " *ngFor="let event of events; let index = index">
 
-    <div class="col-sm-6">
+    <div class="col-12">
         <p><strong>{{event.start}}</strong></p>
         <dl-date-time-picker
           startView="day"
@@ -147,7 +147,7 @@
         <!--placeholder="Not set">-->
     </div>
 
-    <div class="col-sm-6 flex-center">
+    <div class="col-12 flex-center">
         <mat-form-field>
           <mat-label>Select duration</mat-label>
           <mat-select (valueChange)="changeEvent(event.start,index);" #selectHours>
@@ -173,7 +173,7 @@
         <!--placeholder="Not set">-->
     </div>
 
-    <div class="col-sm-6 flex-center">
+    <div class="col-12 flex-center">
       <mat-form-field>
         <mat-label>People count</mat-label>
         <mat-select #selectPeople>
@@ -198,7 +198,7 @@
       <!--altFormat="F j, Y H:i"-->
       <!--placeholder="Not set">-->
     </div>
-    <div class="col-sm-6 flex-center">
+    <div class="col-12 flex-center">
       <button mat-raised-button
               class="pink"
           (click)="events.splice(index, 1); refresh.next()">
