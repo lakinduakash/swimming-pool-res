@@ -116,21 +116,12 @@
     </button>
     <div class="clearfix"></div>
 </h3>
+  <hr>
 
-  <table class="table table-bordered">
 
-    <thead>
-    <tr>
-      <th>Date</th>
-      <th>Duration</th>
-      <th></th>
-    </tr>
-    </thead>
+  <div class="row " *ngFor="let event of events; let index = index">
 
-    <tbody>
-    <tr *ngFor="let event of events; let index = index">
-
-      <td>
+    <div class="col-sm-6">
         <p><strong>{{event.start}}</strong></p>
         <dl-date-time-picker
           startView="day"
@@ -154,10 +145,11 @@
         <!--dateFormat="Y-m-dTH:i"-->
         <!--altFormat="F j, Y H:i"-->
         <!--placeholder="Not set">-->
-      </td>
+    </div>
 
-      <td>
+    <div class="col-sm-6 flex-center">
         <mat-form-field>
+          <mat-label>Select duration</mat-label>
           <mat-select (valueChange)="changeEvent(event.start,index);" #selectHours>
             <mat-option>None</mat-option>
             <mat-option value=1>1 Hour</mat-option>
@@ -179,18 +171,41 @@
         <!--dateFormat="Y-m-dTH:i"-->
         <!--altFormat="F j, Y H:i"-->
         <!--placeholder="Not set">-->
-      </td>
-      <td>
-        <button
-          class="btn btn-danger"
+    </div>
+
+    <div class="col-sm-6 flex-center">
+      <mat-form-field>
+        <mat-label>People count</mat-label>
+        <mat-select #selectPeople>
+          <mat-option>None</mat-option>
+          <mat-option value=1>1</mat-option>
+          <mat-option value=2>2</mat-option>
+          <mat-option value=3>3</mat-option>
+          <mat-option value=4>4</mat-option>
+          <mat-option value=5>5</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <!--<input-->
+      <!--class="form-control"-->
+      <!--type="text"-->
+      <!--ngbDatepicker-->
+      <!--[(ngModel)]="event.start"-->
+      <!--(ngModelChange)="refresh.next()"-->
+      <!--[altInput]="true"-->
+      <!--[convertModelValue]="true"-->
+      <!--[enableTime]="true"-->
+      <!--dateFormat="Y-m-dTH:i"-->
+      <!--altFormat="F j, Y H:i"-->
+      <!--placeholder="Not set">-->
+    </div>
+    <div class="col-sm-6 flex-center">
+      <button mat-raised-button
+              class="pink"
           (click)="events.splice(index, 1); refresh.next()">
           Delete
         </button>
-      </td>
-    </tr>
-    </tbody>
-
-  </table>
+    </div>
+  </div>
 
 </div>
 
