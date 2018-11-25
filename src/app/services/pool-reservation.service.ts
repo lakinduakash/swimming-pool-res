@@ -13,4 +13,13 @@ export class PoolReservationService {
   addEvent(event) {
     this.firestore.collection(`events/${event.month}`).add(event);
   }
+  // method to store contact us details in the firestore
+  // addContactUsForum(event){
+  //   return this.firestore.collection('contactus/').add({
+  //     contactEmail: event.value.contactEmail,
+  //     contactMessage: event.value.contactMessage,
+  //     contactName: event.value.contactName,
+  //     contactSubject: event.value.contactSubject
+  //   });
+  // }
 }
