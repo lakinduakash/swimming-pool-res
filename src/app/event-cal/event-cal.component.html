@@ -30,7 +30,7 @@
           mwlCalendarPreviousView
           [view]="view"
           [(viewDate)]="viewDate"
-          (viewDateChange)="activeDayIsOpen = false">
+          (viewDateChange)="activeDayIsOpen = false;loadEventForMonth()">
           Previous
         </div>
         <div
@@ -44,7 +44,7 @@
           mwlCalendarNextView
           [view]="view"
           [(viewDate)]="viewDate"
-          (viewDateChange)="activeDayIsOpen = false">
+          (viewDateChange)="activeDayIsOpen = false;loadEventForMonth()">
           Next
         </div>
       </div>
@@ -107,7 +107,7 @@
 
   <br><br><br>
 
-  <h3>
+  <h3 class="flex-center">
     Add your reservation
     <div class="clearfix"></div>
 </h3>
@@ -199,7 +199,10 @@
 
   </div>
 
-
+  <h3 class="flex-center">
+    Your reservations
+  </h3>
+  <hr>
   <div class="row" *ngFor="let event of events; let index = index">
 
     <div class="col-md-3 flex-center">
