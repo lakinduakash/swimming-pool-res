@@ -13,6 +13,7 @@ $openSans: 'Open Sans', Helvetica, Arial, sans-serif;
 
 $cyan: #0fe0f5;
 $dark: #2677d4;
+$textCol: #622da8;
 $borderW: 6px;
 
 .blob-btn {
@@ -23,7 +24,7 @@ $borderW: 6px;
   margin-bottom: 30px;
   text-align: center;
   text-transform: uppercase;
-  color: $cyan;
+  color: $textCol;
   font-size: 16px;
   font-weight: bold;
   background-color: transparent;
