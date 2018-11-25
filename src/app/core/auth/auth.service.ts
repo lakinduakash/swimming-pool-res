@@ -30,12 +30,12 @@ export class AuthService {
       switchMap(user => {
         if (user) {
           this.cacheUser = user;
-          return of(user)
+          return of(user);
         } else {
-          return of(null)
+          return of(null);
         }
       })
-    )
+    );
   }
 
 
@@ -45,13 +45,16 @@ export class AuthService {
     return this.oAuthLogin(provider);
   }
 
-  emailLogin(email,password)
-  {
+  faceBookLogin() {
+    const provider = new auth.FacebookAuthProvider();
+    return this.oAuthLogin(provider);
+  }
+
+  emailLogin(email, password) {
     return fromPromise(this.afAuth.auth.signInWithEmailAndPassword(email,password))
   }
 
-  emailSignUp(email,password)
-  {
+  emailSignUp(email, password) {
     return fromPromise(this.afAuth.auth.createUserWithEmailAndPassword(email,password))
   }
 
@@ -92,7 +95,7 @@ export class AuthService {
 
   signOut() {
     this.afAuth.auth.signOut().then(() => {
-      this.router.navigate(['/login']);
+      this.router.navigate(['']);
     });
   }
 }

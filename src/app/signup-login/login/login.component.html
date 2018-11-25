@@ -7,7 +7,7 @@
       <hr>
 
       <div fxLayoutAlign="center" style="margin-bottom: 20px">
-        <div class="google-btn">
+        <div class="google-btn" (click)="authService.googleLogin()">
           <div class="google-icon-wrapper">
             <img class="google-icon" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"/>
           </div>
@@ -16,7 +16,7 @@
       </div>
 
       <div style="display: block" fxLayoutAlign="center">
-        <button class="loginBtn loginBtn--facebook">
+        <button class="loginBtn loginBtn--facebook" (click)="authService.faceBookLogin()">
           Login with Facebook
         </button>
       </div>
@@ -29,7 +29,7 @@
         <div class="container">
           <div class="row">
 
-            <div class="col-sm-12">
+            <div class="col-sm-12" fxLayoutAlign="center">
               <mat-form-field class="example-full-width">
                 <input matInput placeholder="Email" [(ngModel)]="email" name="email" type="email" required>
               </mat-form-field>
@@ -37,7 +37,7 @@
               <mat-error>{{emailVerifiedStatus}}</mat-error>
             </div>
 
-            <div class="col-sm-12">
+            <div class="col-sm-12" fxLayoutAlign="center">
               <mat-form-field class="example-full-width">
                 <input matInput placeholder="Password" [(ngModel)]="password" type="password" name="password" required>
               </mat-form-field>

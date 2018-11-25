@@ -1,6 +1,4 @@
-<div class="space">
-
-</div>
+<div class="space"></div>
 <ng-template #modalContent let-close="close">
   <div class="modal-header">
     <h5 class="modal-title">Event action occurred</h5>
@@ -22,59 +20,60 @@
     <button type="button" class="btn btn-outline-secondary" (click)="close()">OK</button>
   </div>
 </ng-template>
+<div class="container">
 
-<div class="row text-center">
-  <div class="col-md-4">
-    <div class="btn-group">
-      <div
-        class="btn btn-primary"
-        mwlCalendarPreviousView
-        [view]="view"
-        [(viewDate)]="viewDate"
-        (viewDateChange)="activeDayIsOpen = false">
-        Previous
-      </div>
-      <div
-        class="btn btn-outline-secondary"
-        mwlCalendarToday
-        [(viewDate)]="viewDate">
-        Today
-      </div>
-      <div
-        class="btn btn-primary"
-        mwlCalendarNextView
-        [view]="view"
-        [(viewDate)]="viewDate"
-        (viewDateChange)="activeDayIsOpen = false">
-        Next
-      </div>
-    </div>
-  </div>
-  <div class="col-md-4">
-    <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
-  </div>
-  <div class="col-md-4">
-    <div class="btn-group">
-      <div
-        class="btn btn-primary"
-        (click)="view = CalendarView.Month"
-        [class.active]="view === CalendarView.Month">
-        Month
-      </div>
-      <div
-        class="btn btn-primary"
-        (click)="view = CalendarView.Week"
-        [class.active]="view === CalendarView.Week">
-        Week
-      </div>
-      <div
-        class="btn btn-primary"
-        (click)="view = CalendarView.Day"
-        [class.active]="view === CalendarView.Day">
-        Day
+  <div class="row text-center">
+    <div class="col-md-4">
+      <div class="btn-group">
+        <div
+          class="btn btn-primary"
+          mwlCalendarPreviousView
+          [view]="view"
+          [(viewDate)]="viewDate"
+          (viewDateChange)="activeDayIsOpen = false">
+          Previous
+        </div>
+        <div
+          class="btn btn-outline-secondary"
+          mwlCalendarToday
+          [(viewDate)]="viewDate">
+          Today
+        </div>
+        <div
+          class="btn btn-primary"
+          mwlCalendarNextView
+          [view]="view"
+          [(viewDate)]="viewDate"
+          (viewDateChange)="activeDayIsOpen = false">
+          Next
+        </div>
       </div>
     </div>
-  </div>
+    <div class="col-md-4">
+      <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
+    </div>
+    <div class="col-md-4">
+      <div class="btn-group">
+        <div
+          class="btn btn-primary"
+          (click)="view = CalendarView.Month"
+          [class.active]="view === CalendarView.Month">
+          Month
+        </div>
+        <div
+          class="btn btn-primary"
+          (click)="view = CalendarView.Week"
+          [class.active]="view === CalendarView.Week">
+          Week
+        </div>
+        <div
+          class="btn btn-primary"
+          (click)="view = CalendarView.Day"
+          [class.active]="view === CalendarView.Day">
+          Day
+        </div>
+      </div>
+    </div>
 </div>
 <br>
 <div [ngSwitch]="view">
@@ -106,88 +105,108 @@
   </mwl-calendar-day-view>
 </div>
 
-<br><br><br>
+  <br><br><br>
 
-<h3>
-  Edit events
-  <button
-    class="btn btn-primary pull-right"
-    (click)="addEvent()">
-    Add new
-  </button>
-  <div class="clearfix"></div>
+  <h3>
+    Add your reservation
+    <button
+      class="btn btn-primary pull-right"
+      (click)="addEvent()">
+      Add new
+    </button>
+    <div class="clearfix"></div>
 </h3>
+  <hr>
 
-<table class="table table-bordered">
 
-  <thead>
-  <tr>
-    <th>Title</th>
-    <th>Primary color</th>
-    <th>Secondary color</th>
-    <th>Starts at</th>
-    <th>Ends at</th>
-    <th>Remove</th>
-  </tr>
-  </thead>
+  <div class="row " *ngFor="let event of events; let index = index">
 
-  <tbody>
-  <tr *ngFor="let event of events; let index = index">
-    <td>
-      <input
-        type="text"
-        class="form-control"
-        [(ngModel)]="event.title"
-        (keyup)="refresh.next()">
-    </td>
-    <td>
-      <input
-        type="color"
-        [(ngModel)]="event.color.primary"
-        (change)="refresh.next()">
-    </td>
-    <td>
-      <input
-        type="color"
-        [(ngModel)]="event.color.secondary"
-        (change)="refresh.next()">
-    </td>
-    <td>
-      <input
-        class="form-control"
-        type="text"
-        mwlFlatpickr
-        [(ngModel)]="event.start"
-        (ngModelChange)="refresh.next()"
-        [altInput]="true"
-        [convertModelValue]="true"
-        [enableTime]="true"
-        dateFormat="Y-m-dTH:i"
-        altFormat="F j, Y H:i"
-        placeholder="Not set">
-    </td>
-    <td>
-      <input
-        class="form-control"
-        type="text"
-        mwlFlatpickr
-        [(ngModel)]="event.end"
-        (ngModelChange)="refresh.next()"
-        [altInput]="true"
-        [convertModelValue]="true"
-        [enableTime]="true"
-        dateFormat="Y-m-dTH:i"
-        altFormat="F j, Y H:i"
-        placeholder="Not set">
-    </td>
-    <td>
-      <button
-        class="btn btn-danger"
-        (click)="events.splice(index, 1); refresh.next()">
-        Delete
-      </button>
-    </td>
-  </tr>
-  </tbody>
+    <div class="col-sm-6">
+        <p><strong>{{event.start}}</strong></p>
+        <dl-date-time-picker
+          startView="day"
+          maxView="day"
+          minView="minute"
+          minuteStep="30"
+          [(ngModel)]="event.start"
+          (ngModelChange)="refresh.next()"
+          dateFormat="Y-m-dTH:i"
+        >
+        </dl-date-time-picker>
+        <!--<input-->
+        <!--class="form-control"-->
+        <!--type="text"-->
+        <!--ngbDatepicker-->
+        <!--[(ngModel)]="event.end"-->
+        <!--(ngModelChange)="refresh.next()"-->
+        <!--[altInput]="true"-->
+        <!--[convertModelValue]="true"-->
+        <!--[enableTime]="true"-->
+        <!--dateFormat="Y-m-dTH:i"-->
+        <!--altFormat="F j, Y H:i"-->
+        <!--placeholder="Not set">-->
+    </div>
 
-</table>
+    <div class="col-sm-6 flex-center">
+        <mat-form-field>
+          <mat-label>Select duration</mat-label>
+          <mat-select (valueChange)="changeEvent(event.start,index);" #selectHours>
+            <mat-option>None</mat-option>
+            <mat-option value=1>1 Hour</mat-option>
+            <mat-option value=2>2 Hour</mat-option>
+            <mat-option value=3>3 Hour</mat-option>
+            <mat-option value=4>4 Hour</mat-option>
+            <mat-option value=5>5 Hour</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <!--<input-->
+        <!--class="form-control"-->
+        <!--type="text"-->
+        <!--ngbDatepicker-->
+        <!--[(ngModel)]="event.start"-->
+        <!--(ngModelChange)="refresh.next()"-->
+        <!--[altInput]="true"-->
+        <!--[convertModelValue]="true"-->
+        <!--[enableTime]="true"-->
+        <!--dateFormat="Y-m-dTH:i"-->
+        <!--altFormat="F j, Y H:i"-->
+        <!--placeholder="Not set">-->
+    </div>
+
+    <div class="col-sm-6 flex-center">
+      <mat-form-field>
+        <mat-label>People count</mat-label>
+        <mat-select #selectPeople>
+          <mat-option>None</mat-option>
+          <mat-option value=1>1</mat-option>
+          <mat-option value=2>2</mat-option>
+          <mat-option value=3>3</mat-option>
+          <mat-option value=4>4</mat-option>
+          <mat-option value=5>5</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <!--<input-->
+      <!--class="form-control"-->
+      <!--type="text"-->
+      <!--ngbDatepicker-->
+      <!--[(ngModel)]="event.start"-->
+      <!--(ngModelChange)="refresh.next()"-->
+      <!--[altInput]="true"-->
+      <!--[convertModelValue]="true"-->
+      <!--[enableTime]="true"-->
+      <!--dateFormat="Y-m-dTH:i"-->
+      <!--altFormat="F j, Y H:i"-->
+      <!--placeholder="Not set">-->
+    </div>
+    <div class="col-sm-6 flex-center">
+      <button mat-raised-button
+              class="pink"
+          (click)="events.splice(index, 1); refresh.next()">
+          Delete
+        </button>
+    </div>
+  </div>
+
+</div>
+
+

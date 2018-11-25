@@ -12,7 +12,7 @@ import {AppRouteModule} from './route.module';
 import {UserSignInUpModule} from './signup-login/user-signin-up.module';
 import {ButtonsModule, CarouselModule, MDBBootstrapModule, NavbarModule, WavesModule} from 'angular-bootstrap-md';
 import {HomeComponent} from './home/home.component';
-import {MatButtonModule, MatDialogModule} from '@angular/material';
+import {MatButtonModule, MatDialogModule, MatOptionModule, MatSelectModule, MatTabsModule} from '@angular/material';
 import {UserProfileComponent} from './user-profile/user-profile.component';
 import {ContactComponent} from './contact-component/contact.component';
 import {CalendarModule, DateAdapter} from 'angular-calendar';
@@ -23,6 +23,7 @@ import {NgbModalModule} from '@ng-bootstrap/ng-bootstrap';
 import {FlatpickrModule} from 'angularx-flatpickr';
 import {ServicesModule} from './services/services.module';
 import {LoginComponent} from './signup-login/login/login.component';
+import {DlDateTimePickerDateModule} from 'angular-bootstrap-datetimepicker';
 
 
 @NgModule({
@@ -57,7 +58,11 @@ import {LoginComponent} from './signup-login/login/login.component';
     }),
     ServicesModule,
     MatDialogModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    DlDateTimePickerDateModule,
+    MatOptionModule,
+    MatSelectModule,
+    MatTabsModule
   ],
   providers: [],
   bootstrap: [AppComponent],
