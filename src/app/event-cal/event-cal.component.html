@@ -109,27 +109,21 @@
 
   <h3>
     Add your reservation
-    <button
-      class="btn btn-primary pull-right"
-      (click)="addEvent()">
-      Add new
-    </button>
     <div class="clearfix"></div>
 </h3>
   <hr>
 
 
-  <div class="row " *ngFor="let event of events; let index = index">
+  <div class="row ">
 
     <div class="col-12">
-        <p><strong>{{event.start}}</strong></p>
+      <p><strong>{{startDate}}</strong></p>
         <dl-date-time-picker
           startView="day"
           maxView="day"
           minView="minute"
           minuteStep="30"
-          [(ngModel)]="event.start"
-          (ngModelChange)="refresh.next()"
+          [(ngModel)]="startDate"
           dateFormat="Y-m-dTH:i"
         >
         </dl-date-time-picker>
@@ -150,7 +144,7 @@
     <div class="col-12 flex-center">
         <mat-form-field>
           <mat-label>Select duration</mat-label>
-          <mat-select (valueChange)="changeEvent(event.start,index);" #selectHours>
+          <mat-select #selectHours [(value)]="durationHours">
             <mat-option>None</mat-option>
             <mat-option value=1>1 Hour</mat-option>
             <mat-option value=2>2 Hour</mat-option>
@@ -176,7 +170,7 @@
     <div class="col-12 flex-center">
       <mat-form-field>
         <mat-label>People count</mat-label>
-        <mat-select #selectPeople>
+        <mat-select #selectPeople [(value)]="peopleCount">
           <mat-option>None</mat-option>
           <mat-option value=1>1</mat-option>
           <mat-option value=2>2</mat-option>
@@ -198,16 +192,34 @@
       <!--altFormat="F j, Y H:i"-->
       <!--placeholder="Not set">-->
     </div>
-    <div class="col-12 flex-center">
-      <button mat-raised-button
-              class="pink"
-          (click)="events.splice(index, 1); refresh.next()">
-          Delete
-        </button>
-    </div>
 
     <div class="col-12 flex-center">
-      <app-button-water text="Reserve" width="300px"></app-button-water>
+      <app-button-water text="Reserve" width="300px" (clickButton)="addEvent()"></app-button-water>
+    </div>
+
+  </div>
+
+
+  <div class="row" *ngFor="let event of events; let index = index">
+
+    <div class="col-md-3 flex-center">
+      {{event.start| date: 'EEEE, MMMM d, y, h:mm a'}}
+    </div>
+
+    <div class="col-md-3 flex-center">
+      {{event.duration}} Hours
+    </div>
+
+    <div class="col-md-3 flex-center">
+      For {{event.peopleCount}} Person(s)
+    </div>
+
+    <div class="col-md-3 flex-center">
+      <button
+        class="btn btn-danger"
+        (click)="events.splice(index, 1); refresh.next()">
+        Cancel
+      </button>
     </div>
 
   </div>
