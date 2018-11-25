@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
-import {endOfDay, isSameDay, isSameMonth, startOfDay} from 'date-fns';
+import {isSameDay, isSameMonth} from 'date-fns';
 import {Subject} from 'rxjs';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent, CalendarView} from 'angular-calendar';
@@ -44,6 +44,11 @@ export class EventCalComponent implements OnInit {
     event: CalendarEvent;
   };
 
+  startDate: Date;
+  peopleCount;
+  durationHours;
+  package;
+
   actions: CalendarEventAction[] = [
     {
       label: '<i class="fa fa-fw fa-pencil"></i>',
@@ -62,7 +67,7 @@ export class EventCalComponent implements OnInit {
 
   refresh: Subject<any> = new Subject();
 
-  events: CalendarEvent[] = [
+  events: MyCalenderEvent[] = [
     // {
     //   start: subDays(startOfDay(new Date()), 1),
     //   end: addDays(new Date(), 1),
@@ -119,19 +124,26 @@ export class EventCalComponent implements OnInit {
   }
 
   addEvent(): void {
+
+    const startDate = this.startDate;
     this.events.push({
-      title: 'New event',
-      start: startOfDay(new Date()),
-      end: endOfDay(new Date()),
-      color: colors.red,
+      title: 'Reservation',
+      start: this.startDate,
+      end: new Date(startDate.getUTCFullYear(), startDate.getMonth(), startDate.getDate(),
+        startDate.getHours() + Number(this.hourSelector.value), startDate.getMinutes()),
+      duration: Number(this.hourSelector.value),
+      package: this.package,
+      peopleCount: this.peopleCount,
+      color: colors.blue,
       draggable: true,
       resizable: {
-        beforeStart: true,
+        beforeStart: false,
         afterEnd: true
       }
     });
     this.refresh.next();
   }
+
 
   changeEvent(value: Date, index) {
     const a = value;
@@ -148,4 +160,10 @@ export class EventCalComponent implements OnInit {
   saveReservation() {
 
   }
+}
+
+export interface MyCalenderEvent implements CalendarEvent {
+  package?
+  peopleCount?
+  duration?
 }
