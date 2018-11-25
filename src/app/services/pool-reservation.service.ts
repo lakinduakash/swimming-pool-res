@@ -1,7 +1,8 @@
 import {Injectable} from '@angular/core';
 import {AngularFirestore, DocumentReference} from '@angular/fire/firestore';
 import {AuthService} from '../core/auth/auth.service';
-import {from, Observable, of} from 'rxjs';
+import {from, Observable, Subject} from 'rxjs';
+import {MyCalenderEvent} from '../event-cal/event-cal.component';
 
 @Injectable({
   providedIn: 'root'
@@ -12,20 +13,48 @@ export class PoolReservationService {
   }
 
   // example for save event to firestore. This method can called from any component
-  addReservationToUser(year, month, event): Observable<DocumentReference> {
+  addReservationToUser(events: MyCalenderEvent[]): Observable<DocumentReference> {
 
-    let obs: Observable<DocumentReference>;
+    let obs: Subject<any> = new Subject<any>();
+
     this.authService.user.subscribe(user => {
       if (user != null) {
-        obs = from(this.firestore.collection(`user/${user.uid}/reservation/${year}/${month}`).add(event));
+        from(this.firestore.collection(`users/${user.uid}/reservation`).doc(`${'' + events[0].start.getFullYear() + '' + events[0].start.getMonth()}`).set({reservationList: events} as ReservationData)).subscribe(next => obs.next(true));
       } else {
-        obs = of(null);
+        return obs.next(null);
       }
     });
-    return obs;
+
+    return obs as Observable<any>;
   }
+
+  getUserReservations(year, month) {
+
+    let obs: Subject<any> = new Subject<any>();
+
+    this.authService.user.subscribe(user => {
+      if (user != null) {
+        from(this.firestore.collection(`users/${user.uid}/reservation`).doc(`${'' + year + '' + month}`).get()).subscribe(next => obs.next(next.data()), error1 => obs.next(error1));
+      } else {
+        return obs.next(null);
+      }
+    });
+
+    return obs as Observable<any>;
+  }
+
+  getAllReservations(year, month) {
+
+  }
+
+  deleteReservation() {
+
+  }
+
+
+
   // method to store contact us details in the firestore
-  addContactUsForum(event){
+  addContactUsForum(event) {
     return this.firestore.collection('contactus/').add({
       contactEmail: event.value.contactEmail,
       contactMessage: event.value.contactMessage,
@@ -33,4 +62,9 @@ export class PoolReservationService {
       contactSubject: event.value.contactSubject
     });
   }
+}
+
+interface ReservationData {
+  reservationList
+
 }
