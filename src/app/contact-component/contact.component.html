@@ -18,7 +18,7 @@
       <!-- Grid column -->
       <div class="col-md-9 mb-md-0 mb-5">
 
-        <form>
+        <form [formGroup]="contactUsFormGroup" (ngSubmit)="submitContactUsData(contactUsFormGroup)">
 
           <!-- Grid row -->
           <div class="row">
@@ -26,8 +26,7 @@
             <!-- Grid column -->
             <div class="col-md-6">
               <div class="md-form mb-0">
-                <input type="text" id="contact-name" class="form-control">
-                <label for="contact-name" class="">Your name</label>
+                <input type="text" name="contactName" formControlName="contactName" placeholder="Your Name" required>
               </div>
             </div>
             <!-- Grid column -->
@@ -35,8 +34,7 @@
             <!-- Grid column -->
             <div class="col-md-6">
               <div class="md-form mb-0">
-                <input type="text" id="contact-email" class="form-control">
-                <label for="contact-email" class="">Your email</label>
+                <input type="text" name="contactEmail" formControlName="contactEmail"  placeholder="Your Email Address" required>
               </div>
             </div>
             <!-- Grid column -->
@@ -50,8 +48,7 @@
             <!-- Grid column -->
             <div class="col-md-12">
               <div class="md-form mb-0">
-                <input type="text" id="contact-Subject" class="form-control">
-                <label for="contact-Subject" class="">Subject</label>
+                <input type="text" name="contactSubject" formControlName="contactSubject" placeholder="Subject">
               </div>
             </div>
             <!-- Grid column -->
@@ -65,7 +62,7 @@
             <!-- Grid column -->
             <div class="col-md-12">
               <div class="md-form">
-                <textarea type="text" id="contact-message" class="form-control md-textarea" rows="1"></textarea>
+                <textarea type="text" id="contact-message" class="form-control md-textarea" formControlName="contactMessage" rows="1" required name="contactMessage"></textarea>
                 <label for="contact-message">Your message</label>
               </div>
             </div>
@@ -74,11 +71,10 @@
           </div>
           <!-- Grid row -->
 
+          <div class="text-center text-md-left">
+            <button class="btn btn-primary btn-md" type="submit" id="submitButton">Send</button>
+          </div>
         </form>
-
-        <div class="text-center text-md-left">
-          <a class="btn btn-primary btn-md" id="submitButton">Send</a>
-        </div>
 
       </div>
       <!-- Grid column -->

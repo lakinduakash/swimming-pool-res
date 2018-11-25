@@ -18,12 +18,13 @@ import {ContactComponent} from './contact-component/contact.component';
 import {CalendarModule, DateAdapter} from 'angular-calendar';
 import {adapterFactory} from 'angular-calendar/date-adapters/date-fns';
 import {EventCalComponent} from './event-cal/event-cal.component';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {NgbModalModule} from '@ng-bootstrap/ng-bootstrap';
 import {FlatpickrModule} from 'angularx-flatpickr';
 import {ServicesModule} from './services/services.module';
 import {LoginComponent} from './signup-login/login/login.component';
 import {DlDateTimePickerDateModule} from 'angular-bootstrap-datetimepicker';
+
 
 @NgModule({
   declarations: [
@@ -57,6 +58,7 @@ import {DlDateTimePickerDateModule} from 'angular-bootstrap-datetimepicker';
     }),
     ServicesModule,
     MatDialogModule,
+    ReactiveFormsModule,
     DlDateTimePickerDateModule,
     MatOptionModule,
     MatSelectModule,
