@@ -13,14 +13,14 @@ export class ContactComponent implements OnInit {
   contactUsFormGroup: FormGroup;
 
 
-  // constructor(private formBuilder: FormBuilder,private service: PoolReservationService) {
-  //   this.contactUsFormGroup = formBuilder.group( {
-  //     contactName: ['', [Validators.required, Validators.minLength(1)] ],
-  //     contactEmail: ['', [Validators.required, Validators.email] ],
-  //     contactSubject: ['', Validators.minLength(1)],
-  //     contactMessage: ['', Validators.minLength(10)]
-  //   } );
-  // }
+  constructor(private formBuilder: FormBuilder,private service: PoolReservationService) {
+    this.contactUsFormGroup = formBuilder.group( {
+      contactName: ['', [Validators.required, Validators.minLength(1)] ],
+      contactEmail: ['', [Validators.required, Validators.email] ],
+      contactSubject: ['', Validators.minLength(1)],
+      contactMessage: ['', Validators.minLength(10)]
+    } );
+  }
 
   ngOnInit() {
   }
