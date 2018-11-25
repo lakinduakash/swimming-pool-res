@@ -4,6 +4,7 @@ import {Subject} from 'rxjs';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent, CalendarView} from 'angular-calendar';
 import {MatSelect} from '@angular/material';
+import {PoolReservationService} from '../services/pool-reservation.service';
 
 const colors: any = {
   red: {
@@ -86,11 +87,11 @@ export class EventCalComponent implements OnInit {
 
   activeDayIsOpen = true;
 
-  constructor(private modal: NgbModal) {
+  constructor(private modal: NgbModal, public resevationService: PoolReservationService) {
   }
 
   ngOnInit() {
-
+    this.loadEventForMonth();
   }
 
   dayClicked({date, events}: { date: Date; events: CalendarEvent[] }): void {
@@ -127,12 +128,13 @@ export class EventCalComponent implements OnInit {
 
     const startDate = this.startDate;
     this.events.push({
-      title: 'Reservation',
+      title: this.peopleCount + ' people,   @ ' + this.startDate.getHours() + ':' + this.startDate.getMinutes() + '  , duration: ' +
+        this.hourSelector.value + ' Hour',
       start: this.startDate,
       end: new Date(startDate.getUTCFullYear(), startDate.getMonth(), startDate.getDate(),
         startDate.getHours() + Number(this.hourSelector.value), startDate.getMinutes()),
       duration: Number(this.hourSelector.value),
-      package: this.package,
+      // package: this.package,
       peopleCount: this.peopleCount,
       color: colors.blue,
       draggable: true,
@@ -142,28 +144,51 @@ export class EventCalComponent implements OnInit {
       }
     });
     this.refresh.next();
+
+    this.saveReservation();
   }
 
-
-  changeEvent(value: Date, index) {
-    const a = value;
-    const b = new Date(a.getUTCFullYear(), a.getMonth(), a.getDate(), a.getHours() + Number(this.hourSelector.value), a.getMinutes());
-    console.log(b);
-    this.events[index].end = b;
-
-    this.refresh.next();
-
-    console.log(this.events);
-
-  }
 
   saveReservation() {
+    console.log(this.events);
+    this.resevationService.addReservationToUser(this.events).subscribe(next => console.log(next));
+  }
+
+  loadEventForMonth() {
+    this.resevationService.getUserReservations(this.viewDate.getFullYear(), this.viewDate.getMonth()).subscribe(
+      value => {
+        if (value !== undefined) {
+          for (const a of value.reservationList) {
+            const temp = {
+              start: a.start.toDate(),
+              end: a.end.toDate(),
+              title: a.title,
+              package: a.package,
+              peopleCount: a.peopleCount,
+              duration: a.duration,
+              color: a.color,
+              draggable: a.draggable,
+              resizable: a.resizable
+            };
+
+            this.events.push(temp);
+            console.log(temp);
+          }
+        }
+      }
+    );
 
   }
 }
 
-export interface MyCalenderEvent implements CalendarEvent {
-  package?
-  peopleCount?
-  duration?
+export class MyCalenderEvent implements CalendarEvent {
+  start;
+  title;
+  end?;
+  package?;
+  peopleCount?;
+  duration?;
+  color?: any;
+  draggable?: boolean;
+  resizable?: { beforeStart: boolean; afterEnd: boolean; };
 }
