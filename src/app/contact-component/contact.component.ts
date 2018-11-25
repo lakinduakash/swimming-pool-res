@@ -25,11 +25,11 @@ export class ContactComponent implements OnInit {
   ngOnInit() {
   }
 
-  // submitContactUsData(data) {
-  //   if(this.service.addContactUsForum(data)) {
-  //     console.log ('ado anna weda');
-  //   } else {
-  //     console.log ('kela una');
-  //   }
-  // }
+  submitContactUsData(data) {
+    if(this.service.addContactUsForum(data)) {
+      console.log ('ado anna weda');
+    } else {
+      console.log ('kela una');
+    }
+  }
 }
