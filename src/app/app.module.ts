@@ -12,7 +12,14 @@ import {AppRouteModule} from './route.module';
 import {UserSignInUpModule} from './signup-login/user-signin-up.module';
 import {ButtonsModule, CarouselModule, MDBBootstrapModule, NavbarModule, WavesModule} from 'angular-bootstrap-md';
 import {HomeComponent} from './home/home.component';
-import {MatButtonModule, MatDialogModule, MatOptionModule, MatSelectModule} from '@angular/material';
+import {
+  MatButtonModule,
+  MatDialogModule,
+  MatOptionModule,
+  MatProgressSpinnerModule,
+  MatSelectModule,
+  MatSnackBarModule
+} from '@angular/material';
 import {UserProfileComponent} from './user-profile/user-profile.component';
 import {ContactComponent} from './contact-component/contact.component';
 import {CalendarModule, DateAdapter} from 'angular-calendar';
@@ -63,7 +70,9 @@ import {SharedModule} from './shared/shared.module';
     DlDateTimePickerDateModule,
     MatOptionModule,
     MatSelectModule,
-    SharedModule
+    SharedModule,
+    MatProgressSpinnerModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent],
