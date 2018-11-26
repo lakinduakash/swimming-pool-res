@@ -25,6 +25,10 @@ hr{
   margin-left: -50px;
 }
 
+input{
+  width: 100%;
+}
+
 @media only screen and (max-width: 768px) {
   form{
     margin-left: 10%;
