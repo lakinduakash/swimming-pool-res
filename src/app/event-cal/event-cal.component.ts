@@ -3,7 +3,7 @@ import {isSameDay, isSameMonth} from 'date-fns';
 import {Subject} from 'rxjs';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent, CalendarView} from 'angular-calendar';
-import {MatSelect} from '@angular/material';
+import {MatDialog, MatSelect, MatSnackBar} from '@angular/material';
 import {PoolReservationService} from '../services/pool-reservation.service';
 
 const colors: any = {
@@ -39,6 +39,12 @@ export class EventCalComponent implements OnInit {
   CalendarView = CalendarView;
 
   viewDate: Date = new Date();
+
+  eventsLoadingForMonth = true;
+
+  reserving = false;
+
+  reserveError = '';
 
   modalData: {
     action: string;
@@ -87,7 +93,9 @@ export class EventCalComponent implements OnInit {
 
   activeDayIsOpen = true;
 
-  constructor(private modal: NgbModal, public resevationService: PoolReservationService) {
+  constructor(private modal: NgbModal,
+              public reservationService: PoolReservationService,
+              public dialog: MatDialog, public snackBar: MatSnackBar) {
   }
 
   ngOnInit() {
@@ -145,25 +153,37 @@ export class EventCalComponent implements OnInit {
     });
     this.refresh.next();
 
-    this.saveReservation();
   }
 
 
   saveReservation() {
+    this.reserving = true;
     console.log(this.events);
-    this.resevationService.addReservationToUser(this.events).subscribe(next => console.log(next));
+    this.reservationService.addReservationToUser(this.startDate.getFullYear(), this.startDate.getMonth(), this.events).subscribe(next => {
+        this.eventsLoadingForMonth = false;
+        this.reserving = false;
+
+        this.addEvent();
+
+        this.openSnackBar('Reservation added', 'Okay');
+      },
+      error1 => {
+        this.reserveError = 'Some error occurred!';
+        this.reserving = false;
+      });
   }
 
   loadEventForMonth() {
-    this.resevationService.getUserReservations(this.viewDate.getFullYear(), this.viewDate.getMonth()).subscribe(
+    this.events = [];
+    this.reservationService.getUserReservations(this.viewDate.getFullYear(), this.viewDate.getMonth()).subscribe(
       value => {
+
         if (value !== undefined) {
           for (const a of value.reservationList) {
             const temp = {
               start: a.start.toDate(),
               end: a.end.toDate(),
               title: a.title,
-              package: a.package,
               peopleCount: a.peopleCount,
               duration: a.duration,
               color: a.color,
@@ -172,14 +192,44 @@ export class EventCalComponent implements OnInit {
             };
 
             this.events.push(temp);
-            console.log(temp);
+            this.refresh.next();
           }
         }
-      }
+        this.refresh.next();
+        this.eventsLoadingForMonth = false;
+      },
+      error1 => {
+        this.eventsLoadingForMonth = false;
+      },
+      () => this.eventsLoadingForMonth = false
     );
 
   }
+
+  cancelReservation(year, month, events) {
+
+    this.reservationService.updateReservation(year, month, events).subscribe(
+      next => {
+        console.log('canceled');
+        this.openSnackBar('Reservation canceled', 'Okay');
+      },
+      error1 => console.log('error ocurred')
+    );
+  }
+
+
+  loadAllUserEvents() {
+
+  }
+
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 2000,
+    });
+  }
 }
+
+
 
 export class MyCalenderEvent implements CalendarEvent {
   start;
