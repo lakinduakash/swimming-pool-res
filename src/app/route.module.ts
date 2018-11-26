@@ -15,7 +15,7 @@ const routes: Routes = [
   {path: 'signup', component: SignupComponent},
   {path: 'home', component: HomeComponent},
   {path: 'contact', component: ContactComponent},
-  {path: 'reserve', component: EventCalComponent, canActivate: AuthGuard},
+  {path: 'reserve', component: EventCalComponent, canActivate: [AuthGuard]},
   {path: '**', component: HomeComponent}
   ];
 
