@@ -30,7 +30,7 @@
           mwlCalendarPreviousView
           [view]="view"
           [(viewDate)]="viewDate"
-          (viewDateChange)="activeDayIsOpen = false;loadEventForMonth()">
+          (viewDateChange)="activeDayIsOpen = false;loadAllEventForMonth()">
           Previous
         </div>
         <div
@@ -45,7 +45,7 @@
           mwlCalendarNextView
           [view]="view"
           [(viewDate)]="viewDate"
-          (viewDateChange)="activeDayIsOpen = false;loadEventForMonth()">
+          (viewDateChange)="activeDayIsOpen = false;loadAllEventForMonth()">
           Next
         </div>
       </div>
