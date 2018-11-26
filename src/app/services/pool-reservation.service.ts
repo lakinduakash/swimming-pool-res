@@ -13,13 +13,13 @@ export class PoolReservationService {
   }
 
   // example for save event to firestore. This method can called from any component
-  addReservationToUser(events: MyCalenderEvent[]): Observable<DocumentReference> {
+  addReservationToUser(year, month, events: MyCalenderEvent[]): Observable<DocumentReference> {
 
     let obs: Subject<any> = new Subject<any>();
 
     this.authService.user.subscribe(user => {
       if (user != null) {
-        from(this.firestore.collection(`users/${user.uid}/reservation`).doc(`${'' + events[0].start.getFullYear() + '' + events[0].start.getMonth()}`).set({reservationList: events} as ReservationData)).subscribe(next => obs.next(true));
+        from(this.firestore.collection(`users/${user.uid}/reservation`).doc(`${'' + year + '' + month}`).set({reservationList: events} as ReservationData)).subscribe(next => obs.next(true));
       } else {
         return obs.next(null);
       }
@@ -34,13 +34,31 @@ export class PoolReservationService {
 
     this.authService.user.subscribe(user => {
       if (user != null) {
-        from(this.firestore.collection(`users/${user.uid}/reservation`).doc(`${'' + year + '' + month}`).get()).subscribe(next => obs.next(next.data()), error1 => obs.next(error1));
+        from(this.firestore.collection(`users/${user.uid}/reservation`).doc(`${'' + year + '' + month}`).get()).subscribe(next => {
+            obs.next(next.data());
+          }, error1 => obs.error(error1),
+          () => obs.complete());
       } else {
         return obs.next(null);
       }
     });
 
     return obs as Observable<any>;
+  }
+
+  updateReservation(year, month, events) {
+    let obs: Subject<any> = new Subject<any>();
+
+    this.authService.user.subscribe(user => {
+      if (user != null) {
+        from(this.firestore.collection(`users/${user.uid}/reservation`).doc(`${'' + year + '' + month}`).update({reservationList: events} as ReservationData)).subscribe(next => obs.next(true));
+      } else {
+        return obs.next(null);
+      }
+    });
+
+    return obs as Observable<any>;
+
   }
 
   getAllReservations(year, month) {
