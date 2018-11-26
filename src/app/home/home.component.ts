@@ -7,9 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  public map: any = { lat: 51.678418, lng: 7.809007 };
+
+  constructor() {}
 
   ngOnInit() {
+
   }
 
 }

@@ -89,6 +89,11 @@ export class PoolReservationService {
       contactSubject: event.value.contactSubject
     });
   }
+
+  // method to retrieve contact us details from database
+  getContactUsDetails(){
+
+  }
 }
 
 interface ReservationData {
