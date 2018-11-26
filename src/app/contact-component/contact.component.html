@@ -8,9 +8,9 @@
     <h2 class="h1-responsive font-weight-bold text-center my-5">Contact us</h2>
     <hr>
     <!-- Section description -->
-    <p class="text-center w-responsive mx-auto mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-      Fugit, error amet numquam iure provident voluptate esse quasi, veritatis totam voluptas nostrum quisquam
-      eum porro a pariatur veniam.</p>
+    <p class="text-center w-responsive mx-auto mb-5">We are here to hear your queries.
+      Contact us and tell us what is your problem is. We will make a inquiry and do our best to resolve your problem. Yor are our valuable customer.
+      Please fill the form and let us know about your problem.</p>
 
     <!-- Grid row -->
     <div class="row">
@@ -78,6 +78,18 @@
 
       </div>
       <!-- Grid column -->
+
+      <div *ngIf="contactName.invalid"
+           class="alert alert-danger">
+
+        <div *ngIf="contactName.errors.required">
+          Name is required.
+        </div>
+        <div *ngIf="contactName.errors.minlength">
+          Name must be at least 4 characters long.
+        </div>
+
+      </div>
 
       <!-- Grid column -->
       <div class="col-md-3 text-center" id="contactDetails">
