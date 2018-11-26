@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {FormGroup, Validators, FormBuilder} from "@angular/forms";
+import {FormGroup, Validators, FormBuilder, FormControl} from "@angular/forms";
 import {PoolReservationService} from "../services/pool-reservation.service";
+import {Router} from '@angular/router';
 
 
 @Component({
@@ -13,12 +14,12 @@ export class ContactComponent implements OnInit {
   contactUsFormGroup: FormGroup;
 
 
-  constructor(private formBuilder: FormBuilder,private service: PoolReservationService) {
+  constructor(private formBuilder: FormBuilder,private service: PoolReservationService, private router: Router) {
     this.contactUsFormGroup = formBuilder.group( {
-      contactName: ['', [Validators.required, Validators.minLength(1)] ],
-      contactEmail: ['', [Validators.required, Validators.email] ],
-      contactSubject: ['', Validators.minLength(1)],
-      contactMessage: ['', Validators.minLength(10)]
+      contactName: new FormControl('', [Validators.required, Validators.minLength(1)]),
+      contactEmail: new FormControl('', [Validators.required, Validators.email] ),
+      contactSubject: new FormControl('', Validators.minLength(1)),
+      contactMessage: new FormControl('', Validators.minLength(10))
     } );
   }
 
@@ -27,7 +28,7 @@ export class ContactComponent implements OnInit {
 
   submitContactUsData(data) {
     if(this.service.addContactUsForum(data)) {
-      console.log ('ado anna weda');
+      this.router.navigate(['']);
     } else {
       console.log ('kela una');
     }

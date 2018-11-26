@@ -17,6 +17,7 @@ import {
   MatDialogModule,
   MatOptionModule,
   MatProgressSpinnerModule,
+  MatInputModule,
   MatSelectModule,
   MatSnackBarModule
 } from '@angular/material';
@@ -56,6 +57,7 @@ import {SharedModule} from './shared/shared.module';
     WavesModule,
     ButtonsModule,
     MatButtonModule,
+    MatInputModule,
     NavbarModule,
     FormsModule,
     NgbModalModule,
