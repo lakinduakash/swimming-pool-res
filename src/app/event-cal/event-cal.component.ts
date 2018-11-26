@@ -177,7 +177,6 @@ export class EventCalComponent implements OnInit {
     this.events = [];
     this.reservationService.getUserReservations(this.viewDate.getFullYear(), this.viewDate.getMonth()).subscribe(
       value => {
-
         if (value !== undefined) {
           for (const a of value.reservationList) {
             const temp = {

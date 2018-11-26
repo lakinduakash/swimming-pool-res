@@ -34,8 +34,7 @@ export class PoolReservationService {
       if (user != null) {
         from(this.firestore.collection(`users/${user.uid}/reservation`).doc(`${'' + year + '' + month}`).get()).subscribe(next => {
             obs.next(next.data());
-          }, error1 => obs.error(error1),
-          () => obs.complete());
+        }, error1 => obs.error(error1))
       }
     });
 
