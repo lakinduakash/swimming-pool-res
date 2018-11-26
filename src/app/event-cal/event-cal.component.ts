@@ -74,6 +74,7 @@ export class EventCalComponent implements OnInit {
 
   refresh: Subject<any> = new Subject();
 
+
   events: MyCalenderEvent[] = [
     // {
     //   start: subDays(startOfDay(new Date()), 1),
@@ -132,10 +133,11 @@ export class EventCalComponent implements OnInit {
     this.modal.open(this.modalContent, {size: 'lg'});
   }
 
-  addEvent(): void {
+  addEvent(): MyCalenderEvent[] {
 
+    const tempEvents = [];
     const startDate = this.startDate;
-    this.events.push({
+    tempEvents.push({
       title: this.peopleCount + ' people,   @ ' + this.startDate.getHours() + ':' + this.startDate.getMinutes() + '  , duration: ' +
         this.hourSelector.value + ' Hour',
       start: this.startDate,
@@ -151,19 +153,23 @@ export class EventCalComponent implements OnInit {
         afterEnd: true
       }
     });
-    this.refresh.next();
 
+
+    return tempEvents.concat(this.events);
   }
 
 
   saveReservation() {
+
+    const tempEvents = this.addEvent();
+
     this.reserving = true;
-    console.log(this.events);
-    this.reservationService.addReservationToUser(this.startDate.getFullYear(), this.startDate.getMonth(), this.events).subscribe(next => {
+    this.reservationService.addReservationToUser(this.startDate.getFullYear(), this.startDate.getMonth(), tempEvents).subscribe(next => {
         this.eventsLoadingForMonth = false;
         this.reserving = false;
 
-        this.addEvent();
+        this.events = tempEvents;
+        this.refresh.next();
 
         this.openSnackBar('Reservation added', 'Okay');
       },
