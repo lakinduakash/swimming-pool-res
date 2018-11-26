@@ -17,7 +17,6 @@ const routes: Routes = [
   {path: 'contact', component: ContactComponent},
   {path: 'reserve', component: EventCalComponent, canActivate: [AuthGuard]},
   {path: '**', component: HomeComponent},
-  {path: 'contactus', component:ContactComponent}
   ];
 
 @NgModule({
