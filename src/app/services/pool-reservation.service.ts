@@ -54,8 +54,27 @@ export class PoolReservationService {
 
   }
 
-  getAllReservations(year, month) {
+  getAllUserReservations() {
+    const obs: Subject<any> = new Subject<any>();
 
+    let reservations = [];
+
+    this.authService.user.subscribe(user => {
+      if (user != null) {
+        from(this.firestore.collection(`users/${user.uid}/reservation`).get()).subscribe(next => {
+          next.docs.forEach(doc => {
+            if (doc.data().reservationList) {
+              const temp = doc.data().reservationList;
+              reservations = reservations.concat(temp);
+            }
+          });
+
+          obs.next(reservations);
+        }, error1 => obs.error(error1));
+      }
+    });
+
+    return obs as Observable<any>;
   }
 
 
