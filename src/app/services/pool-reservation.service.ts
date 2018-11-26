@@ -38,8 +38,6 @@ export class PoolReservationService {
             obs.next(next.data());
           }, error1 => obs.error(error1),
           () => obs.complete());
-      } else {
-        return obs.next(null);
       }
     });
 
@@ -52,8 +50,6 @@ export class PoolReservationService {
     this.authService.user.subscribe(user => {
       if (user != null) {
         from(this.firestore.collection(`users/${user.uid}/reservation`).doc(`${'' + year + '' + month}`).update({reservationList: events} as ReservationData)).subscribe(next => obs.next(true));
-      } else {
-        return obs.next(null);
       }
     });
 
@@ -65,9 +61,6 @@ export class PoolReservationService {
 
   }
 
-  deleteReservation() {
-
-  }
 
 
 
