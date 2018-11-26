@@ -100,7 +100,7 @@ export class EventCalComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loadEventForMonth();
+    this.loadAllUserEvents();
   }
 
   dayClicked({date, events}: { date: Date; events: CalendarEvent[] }): void {
@@ -179,12 +179,12 @@ export class EventCalComponent implements OnInit {
       });
   }
 
-  loadEventForMonth() {
+  loadAllUserEvents() {
     this.events = [];
-    this.reservationService.getUserReservations(this.viewDate.getFullYear(), this.viewDate.getMonth()).subscribe(
+    this.reservationService.getAllUserReservations().subscribe(
       value => {
         if (value !== undefined) {
-          for (const a of value.reservationList) {
+          for (const a of value) {
             const temp = {
               start: a.start.toDate(),
               end: a.end.toDate(),
@@ -223,9 +223,10 @@ export class EventCalComponent implements OnInit {
   }
 
 
-  loadAllUserEvents() {
+  loadAllEventForMonth() {
 
   }
+
 
   openSnackBar(message: string, action: string) {
     this.snackBar.open(message, action, {
