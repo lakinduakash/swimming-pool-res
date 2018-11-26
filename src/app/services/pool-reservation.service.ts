@@ -20,8 +20,6 @@ export class PoolReservationService {
     this.authService.user.subscribe(user => {
       if (user != null) {
         from(this.firestore.collection(`users/${user.uid}/reservation`).doc(`${'' + year + '' + month}`).set({reservationList: events} as ReservationData)).subscribe(next => obs.next(true));
-      } else {
-        return obs.next(null);
       }
     });
 
