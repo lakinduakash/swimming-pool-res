@@ -12,7 +12,11 @@ export class PoolReservationService {
   constructor(public firestore: AngularFirestore, public authService: AuthService) {
   }
 
-  // example for save event to firestore. This method can called from any component
+  /**
+   * New reservation is added to both user and global reservation collections.
+   * It will returns doc id on success adding
+   * @param event reservation to save
+   */
   addReservationToUser(event: MyCalenderEvent): Observable<DocumentReference> {
 
     let obs: Subject<any> = new Subject<any>();
@@ -52,12 +56,14 @@ export class PoolReservationService {
   }
 
   deleteUserReservation(userDocId) {
-    console.log(userDocId);
     const obs: Subject<any> = new Subject<any>();
 
     this.authService.user.subscribe(user => {
       if (user != null) {
-        from(this.firestore.collection(`user/${user.uid}/reservation`).doc(userDocId).delete()).subscribe(next => obs.next('deleted'));
+        from(this.firestore.collection(`users/${user.uid}/reservation`).doc(userDocId).delete()).subscribe(next => {
+          from(this.firestore.collection(`reservation`).doc(userDocId).delete()).subscribe(value =>
+            obs.next('deleted'));
+        });
       }
     });
 
@@ -65,33 +71,9 @@ export class PoolReservationService {
   }
 
 
-  getUserReservations(year, month) {
 
-    let obs: Subject<any> = new Subject<any>();
 
-    this.authService.user.subscribe(user => {
-      if (user != null) {
-        from(this.firestore.collection(`users/${user.uid}/reservation`).doc(`${'' + year + '' + month}`).get()).subscribe(next => {
-            obs.next(next.data());
-        }, error1 => obs.error(error1))
-      }
-    });
 
-    return obs as Observable<any>;
-  }
-
-  updateReservation(year, month, events) {
-    let obs: Subject<any> = new Subject<any>();
-
-    this.authService.user.subscribe(user => {
-      if (user != null) {
-        from(this.firestore.collection(`users/${user.uid}/reservation`).doc(`${'' + year + '' + month}`).update({reservationList: events})).subscribe(next => obs.next(true));
-      }
-    });
-
-    return obs as Observable<any>;
-
-  }
 
   getAllUserReservations() {
     const obs: Subject<any> = new Subject<any>();
