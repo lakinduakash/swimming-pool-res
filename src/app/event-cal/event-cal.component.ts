@@ -197,7 +197,8 @@ export class EventCalComponent implements OnInit {
               draggable: a.draggable,
               resizable: a.resizable,
               docId: a.docId,
-              price: a.price
+              price: a.price,
+              completed: a.completed
             };
 
             this.events.push(temp);
