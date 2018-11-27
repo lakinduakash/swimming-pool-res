@@ -1,9 +1,18 @@
 mdb-carousel{
   min-width: 100%;
+  height: 100px;
 }
 
 #homeHeadSection{
   height: 100vh;
+}
+
+#corsel{
+  max-height: 100vh;
+}
+
+#servicesSection{
+  height: 50vh;
 }
 
 /* Required for full background image */
@@ -118,6 +127,9 @@ media queries to responsive designs
   svg{
     visibility: hidden;
 
+  }
+  #servicesSection{
+    visibility: hidden;
   }
 
 }
