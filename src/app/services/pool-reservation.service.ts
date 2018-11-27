@@ -23,6 +23,7 @@ export class PoolReservationService {
 
     this.authService.user.subscribe(user => {
       if (user != null) {
+        event.uid = user.uid;
         from(this.firestore.collection(`users/${user.uid}/reservation`).add({
           reservationDetails: event,
           uid: user.uid,
@@ -42,6 +43,7 @@ export class PoolReservationService {
 
     this.authService.user.subscribe(user => {
       if (user != null) {
+        event.uid = user.uid;
         from(this.firestore.collection(`reservation`).doc(userDocId).set({
           reservationDetails: event,
           uid: user.uid,
