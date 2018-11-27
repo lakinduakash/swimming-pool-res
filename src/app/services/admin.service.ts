@@ -131,6 +131,38 @@ export class AdminService {
     return obs as Observable<any>;
   }
 
+  /**
+   * return reservations for particular year and month
+   * @param year year to filter
+   * @param month month to filter
+   * @param date date to filter
+   */
+  getUserReservationForDate(year: number, month: number, date: number) {
+    const obs: Subject<any> = new Subject<any>();
+    this.authService.user.subscribe(user => {
+      if (user != null) {
+        this.firestore.collection(`reservation`).ref.where('year', '==', year).where('month', '==', month).where('date', '==', date)
+          .onSnapshot(next => {
+            const arr = [];
+            next.docs.forEach(doc => {
+
+              if (doc.data().reservationDetails) {
+                const temp = doc.data().reservationDetails;
+                temp.docId = doc.id;
+                console.log(temp);
+                arr.push(temp);
+              }
+            });
+            console.log(arr);
+            obs.next(arr);
+
+          }, error1 => obs.error(error1));
+      }
+    });
+
+    return obs as Observable<any>;
+  }
+
 }
 
 export interface ReservationData {
