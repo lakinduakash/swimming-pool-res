@@ -56,6 +56,9 @@ export class EventCalComponent implements OnInit {
   durationHours;
   package;
 
+  eventsForCurrentMonth = [];
+  eventForUser = [];
+
   actions: CalendarEventAction[] = [
     {
       label: '<i class="fa fa-fw fa-pencil"></i>',
@@ -75,22 +78,7 @@ export class EventCalComponent implements OnInit {
   refresh: Subject<any> = new Subject();
 
 
-  events: MyCalenderEvent[] = [
-    // {
-    //   start: subDays(startOfDay(new Date()), 1),
-    //   end: addDays(new Date(), 1),
-    //   title: 'A 3 day event',
-    //   color: colors.red,
-    //   actions: this.actions,
-    //   allDay: true,
-    //   resizable: {
-    //     beforeStart: true,
-    //     afterEnd: true
-    //   },
-    //   draggable: true
-    // }
-
-  ];
+  events: MyCalenderEvent[] = [];
 
   activeDayIsOpen = true;
 
@@ -101,7 +89,7 @@ export class EventCalComponent implements OnInit {
 
   ngOnInit() {
     this.loadAllUserEvents();
-    this.reservationService.getUserReservationForMonth(2018, 10).subscribe(next => console.log(next));
+    this.loadAllEventForMonth(this.viewDate.getFullYear(), this.viewDate.getMonth());
   }
 
   dayClicked({date, events}: { date: Date; events: CalendarEvent[] }): void {
@@ -134,7 +122,7 @@ export class EventCalComponent implements OnInit {
     this.modal.open(this.modalContent, {size: 'lg'});
   }
 
-  addEvent(): { tempEvents, newEvent } {
+  addEvent(): { tempEvents, newEvent, length } {
 
     const tempEvents = [];
     const startDate = this.startDate;
@@ -160,7 +148,7 @@ export class EventCalComponent implements OnInit {
     tempEvents.push(newEvent);
 
 
-    return {tempEvents: tempEvents.concat(this.events), newEvent: newEvent};
+    return {tempEvents: tempEvents.concat(this.events), newEvent: newEvent, length: tempEvents.length};
   }
 
 
@@ -172,8 +160,9 @@ export class EventCalComponent implements OnInit {
     this.reservationService.addReservationToUser(newEventDetails.newEvent).subscribe(next => {
         this.eventsLoadingForMonth = false;
         this.reserving = false;
-
+        newEventDetails.tempEvents[newEventDetails.length - 1].docId = next;
         this.events = newEventDetails.tempEvents;
+        console.log(this.events);
         this.refresh.next();
 
         this.openSnackBar('Reservation added', 'Okay');
@@ -228,8 +217,20 @@ export class EventCalComponent implements OnInit {
   }
 
 
-  loadAllEventForMonth() {
+  loadAllEventForMonth(year, month) {
+    this.reservationService.getUserReservationForMonth(year, month).subscribe(next => {
+      const a = next as MyCalenderEvent[];
+      const temp = [];
+      a.forEach(item => {
+          item.start = item.start.toDate();
+          item.end = item.end.toDate();
+          temp.push(item);
+        }
+      );
 
+      this.eventsForCurrentMonth = temp;
+      this.refresh.next();
+    });
   }
 
 
