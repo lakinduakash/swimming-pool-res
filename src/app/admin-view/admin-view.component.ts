@@ -158,6 +158,7 @@ export class AdminViewComponent implements OnInit {
         beforeStart: false,
         afterEnd: true
       },
+      completed: false,
       price: this.price,
       date: this.startDate.getDate(),
     } as MyCalenderEvent;
@@ -381,6 +382,10 @@ export class AdminViewComponent implements OnInit {
         ]
       },
       options: {
+        title: {
+          display: true,
+          text: 'Income Per day'
+        },
         legend: {
           display: false
         },
@@ -414,6 +419,7 @@ export class MyCalenderEvent implements CalendarEvent {
   date?;
   peopleCount?;
   duration?;
+  completed? = false;
   color?: any;
   draggable?: boolean;
   resizable?: { beforeStart: boolean; afterEnd: boolean; };
