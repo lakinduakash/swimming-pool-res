@@ -47,6 +47,7 @@ export class PoolReservationService {
           uid: user.uid,
           month: event.month,
           year: event.year,
+          date: event.start.getDate(),
           docId: userDocId
         } as ReservationData)).subscribe(next => obs.next('added'));
       }
@@ -132,7 +133,6 @@ export class PoolReservationService {
   }
 
 
-
   // method to store contact us details in the firestore
   addContactUsForum(event) {
     return this.firestore.collection('contactus/').add({
@@ -154,5 +154,6 @@ export interface ReservationData {
   uid?
   month?
   year?
+  date?
   docId?
 }
