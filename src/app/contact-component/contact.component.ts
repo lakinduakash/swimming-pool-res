@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {FormGroup, Validators, FormBuilder, FormControl} from "@angular/forms";
 import {PoolReservationService} from "../services/pool-reservation.service";
 import {Router} from '@angular/router';
@@ -12,7 +12,8 @@ import {Router} from '@angular/router';
 export class ContactComponent implements OnInit {
 
   contactUsFormGroup: FormGroup;
-
+  arr = [0, 1, 2]; // 0 = false, 1 = true, 2 = error
+  success = this.arr[0];
 
   constructor(private formBuilder: FormBuilder,private service: PoolReservationService, private router: Router) {
     this.contactUsFormGroup = formBuilder.group( {
@@ -28,9 +29,10 @@ export class ContactComponent implements OnInit {
 
   submitContactUsData(data) {
     if(this.service.addContactUsForum(data)) {
-      this.router.navigate(['']);
+      this.success = this.arr[1];
+      this.contactUsFormGroup.reset();
     } else {
-      console.log ('kela una');
+      this.success = this.arr[2]
     }
   }
 }
