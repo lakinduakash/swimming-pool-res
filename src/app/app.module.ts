@@ -42,7 +42,8 @@ import {AdminViewComponent} from './admin-view/admin-view.component';
     HomeComponent,
     UserProfileComponent,
     ContactComponent,
-    EventCalComponent
+    EventCalComponent,
+    AdminViewComponent
   ],
   imports: [
     BrowserModule,
@@ -76,7 +77,6 @@ import {AdminViewComponent} from './admin-view/admin-view.component';
     SharedModule,
     MatProgressSpinnerModule,
     MatSnackBarModule,
-    AdminViewComponent
   ],
   providers: [],
   bootstrap: [AppComponent],
