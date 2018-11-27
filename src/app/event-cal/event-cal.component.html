@@ -114,19 +114,23 @@
   <hr>
   <div class="row" *ngFor="let event of events; let index = index">
 
-    <div class="col-md-3 flex-center">
+    <div class="col-md-2 flex-center">
       {{event.start| date: 'EEEE, MMMM d, y, h:mm a'}}
     </div>
 
-    <div class="col-md-3 flex-center">
+    <div class="col-md-2 flex-center">
       {{event.duration}} Hours
     </div>
 
-    <div class="col-md-3 flex-center">
+    <div class="col-md-2 flex-center">
       For {{event.peopleCount}} Person(s)
     </div>
 
-    <div class="col-md-3 flex-center">
+    <div class="col-md-2 flex-center">
+      Rs: {{event.price}}
+    </div>
+
+    <div class="col-md-2 flex-center">
       <button
         class="btn btn-danger"
         (click)="events.splice(index, 1); cancelReservation(event.docId); refresh.next()">
