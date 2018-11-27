@@ -2,7 +2,7 @@
 <mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark indigo fixed-top">
 
   <!-- Navbar brand -->
-  <mdb-navbar-brand><a class="navbar-brand" routerLink="home">Swimming Pool</a></mdb-navbar-brand>
+  <mdb-navbar-brand><a class="navbar-brand" routerLink="home">{{ title }}</a></mdb-navbar-brand>
 
   <!-- Collapsible content -->
   <links>
@@ -16,7 +16,7 @@
         <a class="nav-link waves-light" mdbWavesEffect routerLink="reserve">Reserve</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link waves-light" mdbWavesEffect>Pricing</a>
+        <a class="nav-link waves-light" mdbWavesEffect>Packages</a>
       </li>
 
       <!-- Dropdown -->
@@ -43,7 +43,7 @@
 
       <li class="nav-item dropdown" dropdown>
         <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
-          <i class="material-icons white-text">
+          <i class="material-icons white-text" style="margin-right: 7px">
             account_circle
           </i> {{loginText}}</a>
         <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">

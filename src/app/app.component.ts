@@ -9,7 +9,7 @@ import {LoginComponent} from './signup-login/login/login.component';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'swimming-pool-res';
+  title = 'Aqua Technics';
 
   loginText = 'Login/Signup';
 

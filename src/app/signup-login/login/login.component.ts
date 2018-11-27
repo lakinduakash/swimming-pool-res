@@ -5,6 +5,8 @@ import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {fromPromise} from 'rxjs/internal-compatibility';
 import {animate, state, style, transition, trigger} from '@angular/animations';
+import {MatDialog} from "@angular/material";
+import {SignupComponent} from "../signup/signup.component";
 
 
 @Component({
@@ -39,7 +41,7 @@ export class LoginComponent implements OnInit {
   emailSentMassage = '';
   errorMassage = '';
 
-  constructor(private authService: AuthService, private router: Router, private breakPointObserver: BreakpointObserver, private authf: AngularFireAuth) {
+  constructor(private authService: AuthService, private router: Router, private breakPointObserver: BreakpointObserver, private authf: AngularFireAuth, public dialog: MatDialog) {
 
     this.authf.user.subscribe(next => {
       if (next != undefined && next.emailVerified)
@@ -107,5 +109,11 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  redirectToSignUp(){
+
+    this.dialog.closeAll();
+    this.router.navigate(['signup']);
+
+  }
 
 }
