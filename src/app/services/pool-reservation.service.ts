@@ -13,18 +13,57 @@ export class PoolReservationService {
   }
 
   // example for save event to firestore. This method can called from any component
-  addReservationToUser(year, month, events: MyCalenderEvent[]): Observable<DocumentReference> {
+  addReservationToUser(event: MyCalenderEvent): Observable<DocumentReference> {
 
     let obs: Subject<any> = new Subject<any>();
 
     this.authService.user.subscribe(user => {
       if (user != null) {
-        from(this.firestore.collection(`users/${user.uid}/reservation`).doc(`${'' + year + '' + month}`).set({reservationList: events} as ReservationData)).subscribe(next => obs.next(true));
+        from(this.firestore.collection(`users/${user.uid}/reservation`).add({
+          reservationDetails: event,
+          uid: user.uid,
+          month: event.month,
+          year: event.year
+        } as ReservationData)).subscribe(next => {
+          this.addReservationToGlobal(next.id, event).subscribe(val => obs.next(next.id));
+        });
       }
     });
 
     return obs as Observable<any>;
   }
+
+  addReservationToGlobal(userDocId, event) {
+    let obs: Subject<any> = new Subject<any>();
+
+    this.authService.user.subscribe(user => {
+      if (user != null) {
+        from(this.firestore.collection(`reservation`).doc(userDocId).set({
+          reservationDetails: event,
+          uid: user.uid,
+          month: event.month,
+          year: event.year,
+          docId: userDocId
+        } as ReservationData)).subscribe(next => obs.next('added'));
+      }
+    });
+
+    return obs as Observable<any>;
+  }
+
+  deleteUserReservation(userDocId) {
+    console.log(userDocId);
+    const obs: Subject<any> = new Subject<any>();
+
+    this.authService.user.subscribe(user => {
+      if (user != null) {
+        from(this.firestore.collection(`user/${user.uid}/reservation`).doc(userDocId).delete()).subscribe(next => obs.next('deleted'));
+      }
+    });
+
+    return obs as Observable<any>;
+  }
+
 
   getUserReservations(year, month) {
 
@@ -46,7 +85,7 @@ export class PoolReservationService {
 
     this.authService.user.subscribe(user => {
       if (user != null) {
-        from(this.firestore.collection(`users/${user.uid}/reservation`).doc(`${'' + year + '' + month}`).update({reservationList: events} as ReservationData)).subscribe(next => obs.next(true));
+        from(this.firestore.collection(`users/${user.uid}/reservation`).doc(`${'' + year + '' + month}`).update({reservationList: events})).subscribe(next => obs.next(true));
       }
     });
 
@@ -63,8 +102,11 @@ export class PoolReservationService {
       if (user != null) {
         from(this.firestore.collection(`users/${user.uid}/reservation`).get()).subscribe(next => {
           next.docs.forEach(doc => {
-            if (doc.data().reservationList) {
-              const temp = doc.data().reservationList;
+            if (doc.data().reservationDetails) {
+
+              const temp = doc.data().reservationDetails;
+              temp.docId = doc.id;
+              console.log(temp);
               reservations = reservations.concat(temp);
             }
           });
@@ -77,6 +119,31 @@ export class PoolReservationService {
     return obs as Observable<any>;
   }
 
+  getUserReservationForMonth(year, month) {
+    const obs: Subject<any> = new Subject<any>();
+    const arr = [];
+    this.authService.user.subscribe(user => {
+      if (user != null) {
+        from(this.firestore.collection(`reservation`).ref.where('reservationDetails.year', '==', year).where('reservationDetails.month', '==', month)
+          .get()).subscribe(next => {
+          next.docs.forEach(doc => {
+
+            if (doc.data().reservationDetails) {
+              const temp = doc.data().reservationDetails;
+              temp.docId = doc.id;
+              console.log(temp);
+              arr.push(temp);
+            }
+          });
+
+          obs.next(arr);
+
+        }, error1 => obs.error(error1));
+      }
+    });
+
+    return obs;
+  }
 
 
 
@@ -97,6 +164,9 @@ export class PoolReservationService {
 }
 
 interface ReservationData {
-  reservationList
-
+  reservationDetails
+  uid
+  month
+  year
+  docId?
 }
