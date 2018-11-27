@@ -6,6 +6,7 @@ import {CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent, Cale
 import {MatDialog, MatSelect, MatSnackBar} from '@angular/material';
 import {PoolReservationService} from '../services/pool-reservation.service';
 import * as firebase from 'firebase';
+import {MyCalenderEvent} from '../admin-view/admin-view.component';
 
 const colors: any = {
   red: {
@@ -276,21 +277,3 @@ export class EventCalComponent implements OnInit {
   }
 }
 
-
-
-export class MyCalenderEvent implements CalendarEvent {
-  uid?;
-  docId?;
-  start;
-  title;
-  end?;
-  package?;
-  price?;
-  year?;
-  month?;
-  peopleCount?;
-  duration?;
-  color?: any;
-  draggable?: boolean;
-  resizable?: { beforeStart: boolean; afterEnd: boolean; };
-}
