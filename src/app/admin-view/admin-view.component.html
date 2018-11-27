@@ -1,0 +1,264 @@
+<div class="space"></div>
+<ng-template #modalContent let-close="close">
+  <div class="modal-header">
+    <h5 class="modal-title">Event action occurred</h5>
+    <button type="button" class="close" (click)="close()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div>
+      Action:
+      <pre>{{ modalData?.action }}</pre>
+    </div>
+    <div>
+      Event:
+      <pre>{{ modalData?.event | json }}</pre>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-secondary" (click)="close()">OK</button>
+  </div>
+</ng-template>
+<div class="container" style="margin-bottom: 30px">
+
+  <div class="row text-center">
+    <div class="col-md-4">
+      <div class="btn-group">
+        <div
+          class="btn btn-primary"
+          mwlCalendarPreviousView
+          [view]="view"
+          [(viewDate)]="viewDate"
+          (viewDateChange)="activeDayIsOpen = false;loadAllEventForMonth(viewDate.getFullYear(),viewDate.getMonth())">
+          Previous
+        </div>
+        <div
+          class="btn btn-outline-secondary"
+          mwlCalendarToday
+          (click)="loadAllEventForMonth(viewDate.getFullYear(),viewDate.getMonth())"
+          [(viewDate)]="viewDate">
+          Today
+        </div>
+        <div
+          class="btn btn-primary"
+          mwlCalendarNextView
+          [view]="view"
+          [(viewDate)]="viewDate"
+          (viewDateChange)="activeDayIsOpen = false;loadAllEventForMonth(viewDate.getFullYear(),viewDate.getMonth())">
+          Next
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
+    </div>
+    <div class="col-md-4">
+      <div class="btn-group">
+        <div
+          class="btn btn-primary"
+          (click)="view = CalendarView.Month"
+          [class.active]="view === CalendarView.Month">
+          Month
+        </div>
+        <div
+          class="btn btn-primary"
+          (click)="view = CalendarView.Week"
+          [class.active]="view === CalendarView.Week">
+          Week
+        </div>
+        <div
+          class="btn btn-primary"
+          (click)="view = CalendarView.Day"
+          [class.active]="view === CalendarView.Day">
+          Day
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+  <div [ngSwitch]="view">
+    <mwl-calendar-month-view
+      *ngSwitchCase="CalendarView.Month"
+      [viewDate]="viewDate"
+      [events]="eventsForCurrentMonth"
+      [refresh]="refresh"
+      [activeDayIsOpen]="activeDayIsOpen"
+      (dayClicked)="dayClicked($event.day)"
+      (eventClicked)="handleEvent('Clicked', $event.event)"
+      (eventTimesChanged)="eventTimesChanged($event)">
+    </mwl-calendar-month-view>
+    <mwl-calendar-week-view
+      *ngSwitchCase="CalendarView.Week"
+      [viewDate]="viewDate"
+      [events]="eventsForCurrentMonth"
+      [refresh]="refresh"
+      (eventClicked)="handleEvent('Clicked', $event.event)"
+      (eventTimesChanged)="eventTimesChanged($event)">
+    </mwl-calendar-week-view>
+    <mwl-calendar-day-view
+      *ngSwitchCase="CalendarView.Day"
+      [viewDate]="viewDate"
+      [events]="eventsForCurrentMonth"
+      [refresh]="refresh"
+      (eventClicked)="handleEvent('Clicked', $event.event)"
+      (eventTimesChanged)="eventTimesChanged($event)">
+    </mwl-calendar-day-view>
+  </div>
+
+  <br><br><br>
+
+  <h3 class="flex-center">
+    Your reservations
+  </h3>
+  <hr>
+  <div class="row" *ngFor="let event of events; let index = index">
+
+    <div class="col-md-2 flex-center">
+      {{event.start| date: 'EEEE, MMMM d, y, h:mm a'}}
+    </div>
+
+    <div class="col-md-2 flex-center">
+      {{event.duration}} Hours
+    </div>
+
+    <div class="col-md-2 flex-center">
+      For {{event.peopleCount}} Person(s)
+    </div>
+
+    <div class="col-md-2 flex-center">
+      Rs: {{event.price}}
+    </div>
+
+    <div class="col-md-2 flex-center">
+      <button
+        class="btn btn-danger"
+        (click)="events.splice(index, 1); cancelReservation(event.docId); refresh.next()">
+        Cancel
+      </button>
+    </div>
+
+  </div>
+
+
+  <div style="width: 100%; height: 100px" class="flex-center">
+    <mat-spinner *ngIf="eventsLoadingForMonth"></mat-spinner>
+  </div>
+
+  <h3 class="flex-center">
+    Add your reservation
+    <div class="clearfix"></div>
+  </h3>
+  <hr>
+
+
+  <div class="row ">
+
+    <div class="col-12">
+      <p><strong>{{startDate}}</strong></p>
+      <dl-date-time-picker
+        startView="day"
+        maxView="day"
+        minView="minute"
+        minuteStep="30"
+        [(ngModel)]="startDate"
+        dateFormat="Y-m-dTH:i"
+        (change)="dataValidation();"
+      >
+      </dl-date-time-picker>
+      <!--<input-->
+      <!--class="form-control"-->
+      <!--type="text"-->
+      <!--ngbDatepicker-->
+      <!--[(ngModel)]="event.end"-->
+      <!--(ngModelChange)="refresh.next()"-->
+      <!--[altInput]="true"-->
+      <!--[convertModelValue]="true"-->
+      <!--[enableTime]="true"-->
+      <!--dateFormat="Y-m-dTH:i"-->
+      <!--altFormat="F j, Y H:i"-->
+      <!--placeholder="Not set">-->
+    </div>
+
+    <div class="col-12 flex-center">
+      <mat-form-field>
+        <mat-label>Select duration</mat-label>
+        <mat-select #selectHours [(value)]="durationHours" (valueChange)="getPrice()">
+          <mat-option>None</mat-option>
+          <mat-option value=1>1 Hour</mat-option>
+          <mat-option value=2>2 Hour</mat-option>
+          <mat-option value=3>3 Hour</mat-option>
+          <mat-option value=4>4 Hour</mat-option>
+          <mat-option value=5>5 Hour</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <!--<input-->
+      <!--class="form-control"-->
+      <!--type="text"-->
+      <!--ngbDatepicker-->
+      <!--[(ngModel)]="event.start"-->
+      <!--(ngModelChange)="refresh.next()"-->
+      <!--[altInput]="true"-->
+      <!--[convertModelValue]="true"-->
+      <!--[enableTime]="true"-->
+      <!--dateFormat="Y-m-dTH:i"-->
+      <!--altFormat="F j, Y H:i"-->
+      <!--placeholder="Not set">-->
+    </div>
+
+    <div class="col-12 flex-center">
+      <mat-form-field>
+        <mat-label>People count</mat-label>
+        <mat-select #selectPeople [(value)]="peopleCount" (valueChange)="getPrice()">
+          <mat-option>None</mat-option>
+          <mat-option value=1>1</mat-option>
+          <mat-option value=2>2</mat-option>
+          <mat-option value=3>3</mat-option>
+          <mat-option value=4>4</mat-option>
+          <mat-option value=5>5</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <!--<input-->
+      <!--class="form-control"-->
+      <!--type="text"-->
+      <!--ngbDatepicker-->
+      <!--[(ngModel)]="event.start"-->
+      <!--(ngModelChange)="refresh.next()"-->
+      <!--[altInput]="true"-->
+      <!--[convertModelValue]="true"-->
+      <!--[enableTime]="true"-->
+      <!--dateFormat="Y-m-dTH:i"-->
+      <!--altFormat="F j, Y H:i"-->
+      <!--placeholder="Not set">-->
+    </div>
+
+    <div class="col-12 flex-center" *ngIf="price>0">
+      <hr>
+      <h5>Amount: <strong>Rs:{{price}}</strong></h5>
+      <hr>
+    </div>
+
+    <div class="col-12 flex-center" *ngIf="!isValidSelection && changedData>2">
+      <p class="mat-error"> Please choose valid date and time</p>
+    </div>
+
+    <div class="col-12 flex-center">
+      <app-button-water text="Reserve" width="300px" (clickButton)="saveReservation()"
+                        [disabled]="!isValidSelection"></app-button-water>
+    </div>
+
+    <div class="col-12 flex-center">
+      <mat-spinner *ngIf="reserving"></mat-spinner>
+    </div>
+
+
+  </div>
+
+
+</div>
+
+<div style="width: 100%;height: 100px;">
+
+</div>
+
+
