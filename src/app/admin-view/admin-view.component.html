@@ -69,7 +69,7 @@
         </div>
         <div
           class="btn btn-primary"
-          (click)="view = CalendarView.Day"
+          (click)="view = CalendarView.Day;"
           [class.active]="view === CalendarView.Day">
           Day
         </div>
@@ -108,11 +108,16 @@
 
   <br><br><br>
 
+
+  <div #canvas>
+    <canvas id="canvas">{{ chart }}</canvas>
+  </div>
+
   <h3 class="flex-center">
-    Your reservations
+    Reservation for current month
   </h3>
   <hr>
-  <div class="row" *ngFor="let event of events; let index = index">
+  <div class="row" *ngFor="let event of eventsForCurrentMonth; let index = index">
 
     <div class="col-md-2 flex-center">
       {{event.start| date: 'EEEE, MMMM d, y, h:mm a'}}
@@ -131,6 +136,10 @@
     </div>
 
     <div class="col-md-2 flex-center">
+      <strong>ID: {{event.docId}}</strong>
+    </div>
+
+    <div class="col-md-12 flex-center">
       <button
         class="btn btn-danger"
         (click)="events.splice(index, 1); cancelReservation(event.docId); refresh.next()">

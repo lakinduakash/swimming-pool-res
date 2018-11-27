@@ -1,11 +1,12 @@
-import {ChangeDetectionStrategy, Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
+import {ChangeDetectionStrategy, Component, ElementRef, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {isSameDay, isSameMonth} from 'date-fns';
 import {Subject} from 'rxjs';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent, CalendarView} from 'angular-calendar';
 import {MatDialog, MatSelect, MatSnackBar} from '@angular/material';
-import firestore from 'firebase';
+import * as firebase from 'firebase';
 import {AdminService} from '../services/admin.service';
+import {Chart} from 'chart.js';
 
 const colors: any = {
   red: {
@@ -35,6 +36,10 @@ export class AdminViewComponent implements OnInit {
   @ViewChild('selectHours')
   hourSelector: MatSelect;
 
+  @ViewChild('canvas')
+  canvas: ElementRef;
+
+
   view: CalendarView = CalendarView.Month;
 
   CalendarView = CalendarView;
@@ -61,6 +66,8 @@ export class AdminViewComponent implements OnInit {
   durationHours = 0;
   package;
   price;
+
+  chart = [];
 
   eventsForCurrentMonth = [];
   eventForUser = [];
@@ -96,6 +103,7 @@ export class AdminViewComponent implements OnInit {
   ngOnInit() {
     this.loadAllUserEvents();
     this.loadAllEventForMonth(this.viewDate.getFullYear(), this.viewDate.getMonth());
+    this.initReservationChart();
   }
 
   dayClicked({date, events}: { date: Date; events: CalendarEvent[] }): void {
@@ -241,6 +249,22 @@ export class AdminViewComponent implements OnInit {
     });
   }
 
+  loadAllEventForDate(year, month, date) {
+    this.adminService.getUserReservationForDate(year, month, date).subscribe(next => {
+      const a = next as MyCalenderEvent[];
+      const temp = [];
+      a.forEach(item => {
+          item.start = item.start.toDate();
+          item.end = item.end.toDate();
+          temp.push(item);
+        }
+      );
+
+      this.eventsForCurrentMonth = temp;
+      this.refresh.next();
+    });
+  }
+
 
   openSnackBar(message: string, action: string) {
     this.snackBar.open(message, action, {
@@ -263,7 +287,7 @@ export class AdminViewComponent implements OnInit {
 
   dataValidation() {
     this.changedData += 1;
-    if (this.startDate && Date.now() < firestore.firestore.Timestamp.fromDate(this.startDate).toMillis() + 3600 * 1000) {
+    if (this.startDate && Date.now() < firebase.firestore.Timestamp.fromDate(this.startDate).toMillis() + 3600 * 1000) {
       this.isValidSelection = true;
       this.refresh.next();
       console.log('valid');
@@ -273,6 +297,45 @@ export class AdminViewComponent implements OnInit {
       this.refresh.next();
       console.log('invalid');
     }
+  }
+
+  initReservationChart() {
+    this.chart = new Chart('canvas', {
+      type: 'bar',
+      data: {
+        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        datasets: [{
+          label: '# of Votes',
+          data: [12, 19, 3, 5, 2, 3],
+          backgroundColor: [
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(255, 206, 86, 0.2)',
+            'rgba(75, 192, 192, 0.2)',
+            'rgba(153, 102, 255, 0.2)',
+            'rgba(255, 159, 64, 0.2)'
+          ],
+          borderColor: [
+            'rgba(255,99,132,1)',
+            'rgba(54, 162, 235, 1)',
+            'rgba(255, 206, 86, 1)',
+            'rgba(75, 192, 192, 1)',
+            'rgba(153, 102, 255, 1)',
+            'rgba(255, 159, 64, 1)'
+          ],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true
+            }
+          }]
+        }
+      }
+    });
   }
 }
 
