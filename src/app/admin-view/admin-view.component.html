@@ -77,6 +77,21 @@
     </div>
   </div>
   <br>
+
+
+  <hr>
+  <div #canvas>
+    <canvas id="canvas">{{ chart }}</canvas>
+  </div>
+
+  <hr>
+  <div #canvas>
+    <canvas id="canvasIncome">{{ chartIncome }}</canvas>
+  </div>
+
+  <hr>
+
+
   <div [ngSwitch]="view">
     <mwl-calendar-month-view
       *ngSwitchCase="CalendarView.Month"
@@ -109,9 +124,6 @@
   <br><br><br>
 
 
-  <div #canvas>
-    <canvas id="canvas">{{ chart }}</canvas>
-  </div>
 
   <h3 class="flex-center">
     Reservation for current month

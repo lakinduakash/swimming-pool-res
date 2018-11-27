@@ -68,6 +68,7 @@ export class AdminViewComponent implements OnInit {
   price;
 
   chart = [];
+  chartIncome = [];
 
   eventsForCurrentMonth = [];
   eventForUser = [];
@@ -103,7 +104,6 @@ export class AdminViewComponent implements OnInit {
   ngOnInit() {
     this.loadAllUserEvents();
     this.loadAllEventForMonth(this.viewDate.getFullYear(), this.viewDate.getMonth());
-    this.initReservationChart();
   }
 
   dayClicked({date, events}: { date: Date; events: CalendarEvent[] }): void {
@@ -158,7 +158,8 @@ export class AdminViewComponent implements OnInit {
         beforeStart: false,
         afterEnd: true
       },
-      price: this.price
+      price: this.price,
+      date: this.startDate.getDate(),
     } as MyCalenderEvent;
     tempEvents.push(newEvent);
 
@@ -245,6 +246,7 @@ export class AdminViewComponent implements OnInit {
       );
 
       this.eventsForCurrentMonth = temp;
+      this.initReservationChart(this.eventsForCurrentMonth);
       this.refresh.next();
     });
   }
@@ -299,45 +301,104 @@ export class AdminViewComponent implements OnInit {
     }
   }
 
-  initReservationChart() {
+  initReservationChart(eventData: MyCalenderEvent[]) {
+    const dates = Array.from({length: 31}, (v, k) => k + 1);
+    const data = Array(31).fill(0);
+    eventData.forEach(value => {
+        const date = value.start.getDate();
+        data[date] = data[date] + 1;
+      }
+    );
+
+
     this.chart = new Chart('canvas', {
-      type: 'bar',
+      type: 'line',
       data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-        datasets: [{
-          label: '# of Votes',
-          data: [12, 19, 3, 5, 2, 3],
-          backgroundColor: [
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(54, 162, 235, 0.2)',
-            'rgba(255, 206, 86, 0.2)',
-            'rgba(75, 192, 192, 0.2)',
-            'rgba(153, 102, 255, 0.2)',
-            'rgba(255, 159, 64, 0.2)'
-          ],
-          borderColor: [
-            'rgba(255,99,132,1)',
-            'rgba(54, 162, 235, 1)',
-            'rgba(255, 206, 86, 1)',
-            'rgba(75, 192, 192, 1)',
-            'rgba(153, 102, 255, 1)',
-            'rgba(255, 159, 64, 1)'
-          ],
-          borderWidth: 1
-        }]
+        labels: dates,
+        datasets: [
+          {
+            data: data,
+            borderColor: '#d66613',
+            fill: true,
+            backgroundColor: 'rgba(214,102,19,0.44)'
+          },
+        ]
       },
       options: {
+        title: {
+          display: true,
+          text: 'Reservation counts per day'
+        },
+        legend: {
+          display: false
+        },
         scales: {
+          xAxes: [{
+            display: true
+          }],
           yAxes: [{
-            ticks: {
-              beginAtZero: true
-            }
-          }]
+            display: true
+          }],
+        }
+      }
+    });
+
+    this.initIncomeChart(eventData, dates);
+  }
+
+
+  initIncomeChart(eventData: MyCalenderEvent[], datesArray?: number[]) {
+
+    let dates;
+
+    if (!dates) {
+      dates = Array.from({length: 31}, (v, k) => k + 1);
+    }
+    else {
+      dates = datesArray;
+    }
+
+    const data = Array(31).fill(0);
+    eventData.forEach(value => {
+        const date = value.start.getDate();
+        const price = value.price;
+        data[date] = data[date] + price;
+      }
+    );
+
+
+    this.chart = new Chart('canvasIncome', {
+      type: 'line',
+      data: {
+        labels: dates,
+        datasets: [
+          {
+            data: data,
+            borderColor: '#3cba9f',
+            backgroundColor: 'rgba(60, 186, 159, 0.44)',
+            fill: true
+          },
+        ]
+      },
+      options: {
+        legend: {
+          display: false
+        },
+        scales: {
+          xAxes: [{
+            display: true
+          }],
+          yAxes: [{
+            display: true
+          }],
         }
       }
     });
   }
 }
+
+
+
 
 
 export class MyCalenderEvent implements CalendarEvent {
@@ -350,6 +411,7 @@ export class MyCalenderEvent implements CalendarEvent {
   price?;
   year?;
   month?;
+  date?;
   peopleCount?;
   duration?;
   color?: any;
