@@ -5,7 +5,7 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent, CalendarView} from 'angular-calendar';
 import {MatDialog, MatSelect, MatSnackBar} from '@angular/material';
 import {PoolReservationService} from '../services/pool-reservation.service';
-import firestore from 'firebase';
+import * as firebase from 'firebase';
 
 const colors: any = {
   red: {
@@ -263,7 +263,7 @@ export class EventCalComponent implements OnInit {
 
   dataValidation() {
     this.changedData += 1;
-    if (this.startDate && Date.now() < firestore.firestore.Timestamp.fromDate(this.startDate).toMillis() + 3600 * 1000) {
+    if (this.startDate && Date.now() < firebase.firestore.Timestamp.fromDate(this.startDate).toMillis() + 3600 * 1000) {
       this.isValidSelection = true;
       this.refresh.next();
       console.log('valid');
