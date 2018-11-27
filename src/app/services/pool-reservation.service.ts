@@ -70,10 +70,9 @@ export class PoolReservationService {
     return obs as Observable<any>;
   }
 
-
-
-
-
+  /**
+   * This will return all reservation of particular user and it will assign docId on return
+   */
 
   getAllUserReservations() {
     const obs: Subject<any> = new Subject<any>();
@@ -101,7 +100,12 @@ export class PoolReservationService {
     return obs as Observable<any>;
   }
 
-  getUserReservationForMonth(year, month) {
+  /**
+   * return reservations for particular year and month
+   * @param year year to filter
+   * @param month month to filter
+   */
+  getUserReservationForMonth(year: number, month: number) {
     const obs: Subject<any> = new Subject<any>();
     const arr = [];
     this.authService.user.subscribe(user => {
@@ -147,8 +151,8 @@ export class PoolReservationService {
 
 interface ReservationData {
   reservationDetails
-  uid
-  month
-  year
+  uid?
+  month?
+  year?
   docId?
 }
