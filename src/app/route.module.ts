@@ -7,6 +7,7 @@ import {HomeComponent} from './home/home.component';
 import {ContactComponent} from './contact-component/contact.component';
 import {EventCalComponent} from './event-cal/event-cal.component';
 import {AuthGuard} from './core/auth/auth.guard';
+import {AdminViewComponent} from './admin-view/admin-view.component';
 
 
 const routes: Routes = [
@@ -16,6 +17,7 @@ const routes: Routes = [
   {path: 'home', component: HomeComponent},
   {path: 'contact', component: ContactComponent},
   {path: 'reserve', component: EventCalComponent, canActivate: [AuthGuard]},
+  {path: 'admin', component: AdminViewComponent},
   {path: '**', component: HomeComponent},
   ];
 
