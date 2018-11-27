@@ -49,27 +49,6 @@ h3{
   margin-top: 13%;
 }
 
-@media only screen and (max-width: 768px) {
-  #packageSection{
-    margin-top: 13%;
-  }
-
-  div[class="card card-cascade narrower mb-4"]{
-    height: 100vh;
-  }
-  img[class="d-block w-100"]{
-    height: 50vh;
-  }
-  svg{
-    visibility: hidden;
-
-  }
-
-}
-/*#testimonials{*/
-  /*height: 100vh;*/
-/*}*/
-
 section{
   height: 100vh;
 }
@@ -78,6 +57,9 @@ img[class="d-block w-100"]{
   height: 85vh;
 }
 
+/*
+css for svg
+ */
 ::selection {
   background-color: salmon;
   color: white;
@@ -116,5 +98,26 @@ img[class="d-block w-100"]{
   height: 10em;
   max-height: 100vh;
   margin: 0;
-  background: #0fe0f5;
+  z-index: 1000;
+}
+
+/*
+media queries to responsive designs
+ */
+@media only screen and (max-width: 768px) {
+  #packageSection{
+    margin-top: 13%;
+  }
+
+  div[class="card card-cascade narrower mb-4"]{
+    height: 100vh;
+  }
+  img[class="d-block w-100"]{
+    height: 50vh;
+  }
+  svg{
+    visibility: hidden;
+
+  }
+
 }
