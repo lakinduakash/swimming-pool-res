@@ -45,6 +45,7 @@ export class AdminService {
         from(this.firestore.collection(`reservation`).doc(userDocId).set({
           reservationDetails: event,
           uid: user.uid,
+          date: event.start.getDate(),
           month: event.month,
           year: event.year,
           docId: userDocId
@@ -171,4 +172,5 @@ export interface ReservationData {
   month?
   year?
   docId?
+  date?
 }
