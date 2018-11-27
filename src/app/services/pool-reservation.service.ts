@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {AngularFirestore, DocumentReference} from '@angular/fire/firestore';
 import {AuthService} from '../core/auth/auth.service';
 import {from, Observable, Subject} from 'rxjs';
-import {MyCalenderEvent} from '../event-cal/event-cal.component';
+import {MyCalenderEvent} from '../admin-view/admin-view.component';
 
 @Injectable({
   providedIn: 'root'

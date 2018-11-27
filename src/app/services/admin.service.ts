@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {AngularFirestore, DocumentReference} from '@angular/fire/firestore';
 import {AuthService} from '../core/auth/auth.service';
 import {from, Observable, Subject} from 'rxjs';
-import {MyCalenderEvent} from '../event-cal/event-cal.component';
+import {MyCalenderEvent} from '../admin-view/admin-view.component';
 
 @Injectable({
   providedIn: 'root'
@@ -164,6 +164,24 @@ export class AdminService {
     return obs as Observable<any>;
   }
 
+
+  markAsComplete(docId, event) {
+    const obs: Subject<any> = new Subject<any>();
+
+    this.authService.user.subscribe(user => {
+      if (user != null) {
+        from(this.firestore.collection(`reservation`).doc(docId).update(
+          {
+            reservationDetails: event,
+            completed: true
+          }
+        )).subscribe(next => obs.next('completed'));
+      }
+    });
+
+    return obs as Observable<any>;
+  }
+
 }
 
 export interface ReservationData {
@@ -173,4 +191,5 @@ export interface ReservationData {
   year?
   docId?
   date?
+  completed?: boolean
 }
