@@ -178,7 +178,7 @@
     <div class="col-12 flex-center">
         <mat-form-field>
           <mat-label>Select duration</mat-label>
-          <mat-select #selectHours [(value)]="durationHours">
+          <mat-select #selectHours [(value)]="durationHours" (valueChange)="getPrice()">
             <mat-option>None</mat-option>
             <mat-option value=1>1 Hour</mat-option>
             <mat-option value=2>2 Hour</mat-option>
@@ -204,7 +204,7 @@
     <div class="col-12 flex-center">
       <mat-form-field>
         <mat-label>People count</mat-label>
-        <mat-select #selectPeople [(value)]="peopleCount">
+        <mat-select #selectPeople [(value)]="peopleCount" (valueChange)="getPrice()">
           <mat-option>None</mat-option>
           <mat-option value=1>1</mat-option>
           <mat-option value=2>2</mat-option>
@@ -225,6 +225,12 @@
       <!--dateFormat="Y-m-dTH:i"-->
       <!--altFormat="F j, Y H:i"-->
       <!--placeholder="Not set">-->
+    </div>
+
+    <div class="col-12 flex-center" *ngIf="price>0">
+      <hr>
+      <h5>Amount: <strong>Rs:{{price}}</strong></h5>
+      <hr>
     </div>
 
     <div class="col-12 flex-center">

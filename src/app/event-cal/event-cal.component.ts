@@ -52,9 +52,10 @@ export class EventCalComponent implements OnInit {
   };
 
   startDate: Date;
-  peopleCount;
-  durationHours;
+  peopleCount = 0;
+  durationHours = 0;
   package;
+  price;
 
   eventsForCurrentMonth = [];
   eventForUser = [];
@@ -238,6 +239,20 @@ export class EventCalComponent implements OnInit {
     this.snackBar.open(message, action, {
       duration: 2000,
     });
+  }
+
+  getPrice() {
+    this.price = Number(this.peopleCount) * Number(this.durationHours) * 100 -
+      (Number(this.durationHours) * 10 + Number(this.peopleCount) * 10);
+
+    if (Number(this.peopleCount) * Number(this.durationHours) > 1) {
+      this.price = Number(this.peopleCount) * Number(this.durationHours) * 100 -
+        (Number(this.durationHours) * 10 + Number(this.peopleCount) * 10);
+    }
+    else {
+      this.price = Number(this.peopleCount) * Number(this.durationHours) * 100;
+    }
+
   }
 }
 
