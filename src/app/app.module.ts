@@ -15,9 +15,9 @@ import {HomeComponent} from './home/home.component';
 import {
   MatButtonModule,
   MatDialogModule,
+  MatInputModule,
   MatOptionModule,
   MatProgressSpinnerModule,
-  MatInputModule,
   MatSelectModule,
   MatSnackBarModule
 } from '@angular/material';
@@ -33,6 +33,7 @@ import {ServicesModule} from './services/services.module';
 import {LoginComponent} from './signup-login/login/login.component';
 import {DlDateTimePickerDateModule} from 'angular-bootstrap-datetimepicker';
 import {SharedModule} from './shared/shared.module';
+import {AdminViewComponent} from './admin-view/admin-view.component';
 
 
 @NgModule({
@@ -74,7 +75,8 @@ import {SharedModule} from './shared/shared.module';
     MatSelectModule,
     SharedModule,
     MatProgressSpinnerModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    AdminViewComponent
   ],
   providers: [],
   bootstrap: [AppComponent],

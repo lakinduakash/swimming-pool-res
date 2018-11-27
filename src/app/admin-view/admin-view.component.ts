@@ -4,8 +4,8 @@ import {Subject} from 'rxjs';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent, CalendarView} from 'angular-calendar';
 import {MatDialog, MatSelect, MatSnackBar} from '@angular/material';
-import {PoolReservationService} from '../services/pool-reservation.service';
 import firestore from 'firebase';
+import {AdminService} from '../services/admin.service';
 
 const colors: any = {
   red: {
@@ -89,7 +89,7 @@ export class AdminViewComponent implements OnInit {
   activeDayIsOpen = true;
 
   constructor(private modal: NgbModal,
-              public reservationService: PoolReservationService,
+              public adminService: AdminService,
               public dialog: MatDialog, public snackBar: MatSnackBar) {
   }
 
@@ -164,7 +164,7 @@ export class AdminViewComponent implements OnInit {
     const newEventDetails = this.addEvent();
 
     this.reserving = true;
-    this.reservationService.addReservationToUser(newEventDetails.newEvent).subscribe(next => {
+    this.adminService.addReservationToUser(newEventDetails.newEvent).subscribe(next => {
         this.eventsLoadingForMonth = false;
         this.reserving = false;
         newEventDetails.tempEvents[newEventDetails.length - 1].docId = next;
@@ -182,7 +182,7 @@ export class AdminViewComponent implements OnInit {
 
   loadAllUserEvents() {
     this.events = [];
-    this.reservationService.getAllUserReservations().subscribe(
+    this.adminService.getAllUserReservations().subscribe(
       value => {
         if (value !== undefined) {
           for (const a of value) {
@@ -215,7 +215,7 @@ export class AdminViewComponent implements OnInit {
   }
 
   cancelReservation(docId) {
-    this.reservationService.deleteUserReservation(docId).subscribe(
+    this.adminService.deleteUserReservation(docId).subscribe(
       next => {
         console.log('canceled');
         this.openSnackBar('Reservation canceled', 'Okay');
@@ -226,7 +226,7 @@ export class AdminViewComponent implements OnInit {
 
 
   loadAllEventForMonth(year, month) {
-    this.reservationService.getUserReservationForMonth(year, month).subscribe(next => {
+    this.adminService.getUserReservationForMonth(year, month).subscribe(next => {
       const a = next as MyCalenderEvent[];
       const temp = [];
       a.forEach(item => {
