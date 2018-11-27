@@ -30,13 +30,13 @@
           mwlCalendarPreviousView
           [view]="view"
           [(viewDate)]="viewDate"
-          (viewDateChange)="activeDayIsOpen = false;loadAllEventForMonth()">
+          (viewDateChange)="activeDayIsOpen = false;loadAllEventForMonth(viewDate.getFullYear(),viewDate.getMonth())">
           Previous
         </div>
         <div
           class="btn btn-outline-secondary"
           mwlCalendarToday
-          (click)="loadEventForMonth()"
+          (click)="loadAllEventForMonth(viewDate.getFullYear(),viewDate.getMonth())"
           [(viewDate)]="viewDate">
           Today
         </div>
@@ -45,7 +45,7 @@
           mwlCalendarNextView
           [view]="view"
           [(viewDate)]="viewDate"
-          (viewDateChange)="activeDayIsOpen = false;loadAllEventForMonth()">
+          (viewDateChange)="activeDayIsOpen = false;loadAllEventForMonth(viewDate.getFullYear(),viewDate.getMonth())">
           Next
         </div>
       </div>
@@ -81,7 +81,7 @@
   <mwl-calendar-month-view
     *ngSwitchCase="CalendarView.Month"
     [viewDate]="viewDate"
-    [events]="events"
+    [events]="eventsForCurrentMonth"
     [refresh]="refresh"
     [activeDayIsOpen]="activeDayIsOpen"
     (dayClicked)="dayClicked($event.day)"
@@ -91,7 +91,7 @@
   <mwl-calendar-week-view
     *ngSwitchCase="CalendarView.Week"
     [viewDate]="viewDate"
-    [events]="events"
+    [events]="eventsForCurrentMonth"
     [refresh]="refresh"
     (eventClicked)="handleEvent('Clicked', $event.event)"
     (eventTimesChanged)="eventTimesChanged($event)">
@@ -99,7 +99,7 @@
   <mwl-calendar-day-view
     *ngSwitchCase="CalendarView.Day"
     [viewDate]="viewDate"
-    [events]="events"
+    [events]="eventsForCurrentMonth"
     [refresh]="refresh"
     (eventClicked)="handleEvent('Clicked', $event.event)"
     (eventTimesChanged)="eventTimesChanged($event)">
