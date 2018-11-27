@@ -12,6 +12,7 @@ export class AppComponent implements OnInit {
   title = 'Aqua Technics';
 
   loginText = 'Login/Signup';
+  userLogged = false;
 
   constructor(public authService: AuthService, public dialog: MatDialog) {
 
@@ -24,8 +25,10 @@ export class AppComponent implements OnInit {
         console.log(user);
         if (user != null) {
           this.loginText = 'Hi, ' + user.displayName;
+          this.userLogged = true;
         } else {
           this.loginText = 'Login/Signup';
+          this.userLogged = false;
         }
       }
     );
@@ -48,6 +51,7 @@ export class AppComponent implements OnInit {
         }
       }
     );
-
   }
+
+
 }
