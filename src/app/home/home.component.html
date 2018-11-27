@@ -2,22 +2,103 @@
 <section>
   <mdb-carousel [isControls]="true" [animation]="'slide'">
     <!--First slide-->
-    <mdb-carousel-item>
-      <img class="d-block w-100" src="https://mdbootstrap.com/img/Photos/Slides/img%20(130).jpg" alt="First slide">
-    </mdb-carousel-item>
+    <div class="view">
+      <mdb-carousel-item>
+        <img class="d-block w-100" src="assets/1.jpg" alt="First slide">
+      </mdb-carousel-item>
+
+      <div class="mask flex-center rgba-black-light">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="slider-content dis-table">
+                <div class="dis-table-cell hs-content slide-content text-center">
+                  <h3>swimming </h3>
+                  <button mdbBtn type="button" gradient="aqua" rounded="true" mdbWavesEffect (click)="redirectUser()">Reserve</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
     <!--/First slide-->
     <!--Second slide-->
-    <mdb-carousel-item>
-      <img class="d-block w-100" src="https://mdbootstrap.com/img/Photos/Slides/img%20(129).jpg" alt="Second slide">
-    </mdb-carousel-item>
+    <div class="view">
+      <mdb-carousel-item>
+        <img class="d-block w-100" src="assets/2.jpg" alt="First slide">
+      </mdb-carousel-item>
+
+      <div class="mask flex-center rgba-black-light">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="slider-content dis-table">
+                <div class="dis-table-cell hs-content slide-content text-center">
+                  <h3>swimming </h3>
+                  <button mdbBtn type="button" gradient="aqua" rounded="true" mdbWavesEffect (click)="redirectUser()">Reserve</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
     <!--/Second slide-->
     <!--Third slide-->
-    <mdb-carousel-item>
-      <img class="d-block w-100" src="https://mdbootstrap.com/img/Photos/Slides/img%20(70).jpg" alt="Third slide">
-    </mdb-carousel-item>
+    <div class="view">
+      <mdb-carousel-item>
+        <img class="d-block w-100" src="assets/3.jpg" alt="First slide">
+      </mdb-carousel-item>
+
+      <div class="mask flex-center rgba-black-light">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="slider-content dis-table">
+                <div class="dis-table-cell hs-content slide-content text-center">
+                  <h3>swimming </h3>
+                  <button mdbBtn type="button" gradient="aqua" rounded="true" mdbWavesEffect (click)="redirectUser()">Reserve</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+<div style="background-image: url('assets/bgmask3.png')">
+
+  <svg class="editorial"
+       xmlns="http://www.w3.org/2000/svg"
+       xmlns:xlink="http://www.w3.org/1999/xlink"
+       viewBox="0 24 150 28"
+       preserveAspectRatio="none"
+
+  >
+    <defs>
+      <path id="gentle-wave"
+            d="M-160 44c30 0
+                    58-18 88-18s
+                    58 18 88 18
+                    58-18 88-18
+                    58 18 88 18
+                     v44h-352z"/>
+    </defs>
+    <g class="parallax">
+      <use xlink:href="#gentle-wave" x="50" y="0" fill="#bbdefb "/>
+      <use xlink:href="#gentle-wave" x="50" y="3" fill="#64b5f6"/>
+      <use xlink:href="#gentle-wave" x="50" y="6" fill="#2196f3"/>
+    </g>
+  </svg>
+
+</div>
     <!--/Third slide-->
   </mdb-carousel>
   <!--/.Carousel Wrapper-->
+
 </section>
 
 <!--Section: Cards-->
@@ -125,9 +206,7 @@
 
         </div>
         <!-- Card Narrower -->
-
       </div>
     </div>
   </section>
-
 </div>

@@ -1,11 +1,21 @@
 <div class="col-lg-10 col-md-12 offset-xl-1">
   <!-- Section: Contact v.1 -->
   <!-- Section: Contact v.2 -->
+
   <section class="my-5" id="contactUsSection">
 
     <!-- Section heading -->
     <br>
     <h2 class="h1-responsive font-weight-bold text-center my-5">Contact us</h2>
+
+    <div #alert class="alert alert-success alert-dismissible fade show" role="alert" *ngIf="success==1">
+      <strong>Thank You!</strong> We will consider your problem and contact you soon as possible.
+    </div>
+
+    <div #alert class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="success==2">
+      <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+    </div>
+
     <hr>
     <!-- Section description -->
     <p class="text-center w-responsive mx-auto mb-5">We are here to hear your queries.
@@ -34,7 +44,7 @@
             <!-- Grid column -->
             <div class="col-md-6">
               <div class="md-form mb-0">
-                <input type="text" name="contactEmail" formControlName="contactEmail"  placeholder="Your Email Address" required>
+                <input type="email" name="contactEmail" formControlName="contactEmail"  placeholder="Your Email Address" required>
               </div>
             </div>
             <!-- Grid column -->
@@ -114,5 +124,12 @@
     <!-- Grid row -->
 
   </section>
+
   <!-- Section: Contact v.1 -->
+  <!--<div class="alert alert-success" role="alert">-->
+    <!--<h4 class="alert-heading">Well done!</h4>-->
+    <!--<p>Aww yeah, you successfully read this important alert message. This example text is going to run a bit longer so that you can see how spacing within an alert works with this kind of content.</p>-->
+    <!--<hr>-->
+    <!--<p class="mb-0">Whenever you need to, be sure to use margin utilities to keep things nice and tidy.</p>-->
+  <!--</div>-->
 </div>

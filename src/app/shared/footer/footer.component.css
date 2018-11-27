@@ -89,3 +89,18 @@ h1 {
 body {
   background-color: #234;
 }
+
+@media only screen and (max-width: 768px) {
+
+  footer{
+    visibility: hidden;
+  }
+  svg{
+    visibility: hidden;
+  }
+
+  div{
+    visibility: hidden;
+  }
+
+}
