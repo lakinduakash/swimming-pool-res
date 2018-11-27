@@ -5,6 +5,7 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent, CalendarView} from 'angular-calendar';
 import {MatDialog, MatSelect, MatSnackBar} from '@angular/material';
 import {PoolReservationService} from '../services/pool-reservation.service';
+import firestore from 'firebase';
 
 const colors: any = {
   red: {
@@ -46,10 +47,14 @@ export class EventCalComponent implements OnInit {
 
   reserveError = '';
 
+  isValidSelection = false;
+
   modalData: {
     action: string;
     event: CalendarEvent;
   };
+
+  changedData = 0;
 
   startDate: Date;
   peopleCount = 0;
@@ -144,7 +149,8 @@ export class EventCalComponent implements OnInit {
       resizable: {
         beforeStart: false,
         afterEnd: true
-      }
+      },
+      price: this.price
     } as MyCalenderEvent
     tempEvents.push(newEvent);
 
@@ -189,7 +195,8 @@ export class EventCalComponent implements OnInit {
               color: a.color,
               draggable: a.draggable,
               resizable: a.resizable,
-              docId: a.docId
+              docId: a.docId,
+              price: a.price
             };
 
             this.events.push(temp);
@@ -242,8 +249,6 @@ export class EventCalComponent implements OnInit {
   }
 
   getPrice() {
-    this.price = Number(this.peopleCount) * Number(this.durationHours) * 100 -
-      (Number(this.durationHours) * 10 + Number(this.peopleCount) * 10);
 
     if (Number(this.peopleCount) * Number(this.durationHours) > 1) {
       this.price = Number(this.peopleCount) * Number(this.durationHours) * 100 -
@@ -253,6 +258,21 @@ export class EventCalComponent implements OnInit {
       this.price = Number(this.peopleCount) * Number(this.durationHours) * 100;
     }
 
+  }
+
+
+  dataValidation() {
+    this.changedData += 1;
+    if (this.startDate && Date.now() < firestore.firestore.Timestamp.fromDate(this.startDate).toMillis() + 3600 * 1000) {
+      this.isValidSelection = true;
+      this.refresh.next();
+      console.log('valid');
+    }
+    else {
+      this.isValidSelection = false;
+      this.refresh.next();
+      console.log('invalid');
+    }
   }
 }
 
@@ -265,6 +285,7 @@ export class MyCalenderEvent implements CalendarEvent {
   title;
   end?;
   package?;
+  price?;
   year?;
   month?;
   peopleCount?;

@@ -2,6 +2,16 @@
   height: 80px;
 }
 
+.overlay-invalid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 40px;
+  width: 300px;
+  z-index: 10;
+  background-color: rgba(239, 239, 239, 0.67);
+}
+
 #loader {
   display: block;
   position: relative;

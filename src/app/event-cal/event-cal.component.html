@@ -159,6 +159,7 @@
           minuteStep="30"
           [(ngModel)]="startDate"
           dateFormat="Y-m-dTH:i"
+          (change)="dataValidation();"
         >
         </dl-date-time-picker>
         <!--<input-->
@@ -233,8 +234,13 @@
       <hr>
     </div>
 
+    <div class="col-12 flex-center" *ngIf="!isValidSelection && changedData>2">
+      <p class="mat-error"> Please choose valid date and time</p>
+    </div>
+
     <div class="col-12 flex-center">
-      <app-button-water text="Reserve" width="300px" (clickButton)="saveReservation()"></app-button-water>
+      <app-button-water text="Reserve" width="300px" (clickButton)="saveReservation()"
+                        [disabled]="!isValidSelection"></app-button-water>
     </div>
 
     <div class="col-12 flex-center">
