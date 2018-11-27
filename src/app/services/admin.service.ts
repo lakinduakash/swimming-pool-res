@@ -175,6 +175,8 @@ export class AdminService {
 
     console.log(event.docId);
 
+    event.completed = true;
+
     this.authService.user.subscribe(user => {
       if (user != null) {
         from(this.firestore.collection(`reservation`).doc(docId).update(
