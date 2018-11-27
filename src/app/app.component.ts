@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {AuthService} from './core/auth/auth.service';
 import {MatDialog} from '@angular/material';
 import {LoginComponent} from './signup-login/login/login.component';
+import {AdminAuthGuard} from './core/auth/admin-auth.guard';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +15,9 @@ export class AppComponent implements OnInit {
   loginText = 'Login/Signup';
   userLogged = false;
 
-  constructor(public authService: AuthService, public dialog: MatDialog) {
+  isAdmin = false;
+
+  constructor(public authService: AuthService, public dialog: MatDialog, private adminGuard: AdminAuthGuard) {
 
   }
 
@@ -32,6 +35,8 @@ export class AppComponent implements OnInit {
         }
       }
     );
+
+    this.adminGuard.canActivate(null, null).subscribe(next => this.isAdmin = next);
 
   }
 
