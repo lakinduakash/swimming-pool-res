@@ -19,7 +19,7 @@ export class PoolReservationService {
    */
   addReservationToUser(event: MyCalenderEvent): Observable<DocumentReference> {
 
-    let obs: Subject<any> = new Subject<any>();
+    const obs: Subject<any> = new Subject<any>();
 
     this.authService.user.subscribe(user => {
       if (user != null) {
@@ -38,7 +38,7 @@ export class PoolReservationService {
   }
 
   addReservationToGlobal(userDocId, event) {
-    let obs: Subject<any> = new Subject<any>();
+    const obs: Subject<any> = new Subject<any>();
 
     this.authService.user.subscribe(user => {
       if (user != null) {
@@ -107,11 +107,11 @@ export class PoolReservationService {
    */
   getUserReservationForMonth(year: number, month: number) {
     const obs: Subject<any> = new Subject<any>();
-    const arr = [];
     this.authService.user.subscribe(user => {
       if (user != null) {
-        from(this.firestore.collection(`reservation`).ref.where('reservationDetails.year', '==', year).where('reservationDetails.month', '==', month)
-          .get()).subscribe(next => {
+        this.firestore.collection(`reservation`).ref.where('year', '==', year).where('month', '==', month)
+          .onSnapshot(next => {
+            const arr = [];
           next.docs.forEach(doc => {
 
             if (doc.data().reservationDetails) {
@@ -121,14 +121,14 @@ export class PoolReservationService {
               arr.push(temp);
             }
           });
-
+            console.log(arr);
           obs.next(arr);
 
         }, error1 => obs.error(error1));
       }
     });
 
-    return obs;
+    return obs as Observable<any>;
   }
 
 
@@ -149,7 +149,7 @@ export class PoolReservationService {
   }
 }
 
-interface ReservationData {
+export interface ReservationData {
   reservationDetails
   uid?
   month?
