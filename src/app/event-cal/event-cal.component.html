@@ -129,7 +129,7 @@
     <div class="col-md-3 flex-center">
       <button
         class="btn btn-danger"
-        (click)="events.splice(index, 1); cancelReservation(event.start.getFullYear(),event.start.getMonth(),events); refresh.next()">
+        (click)="events.splice(index, 1); cancelReservation(event.docId); refresh.next()">
         Cancel
       </button>
     </div>
