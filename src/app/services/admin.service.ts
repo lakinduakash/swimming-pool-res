@@ -23,10 +23,13 @@ export class AdminService {
 
     this.authService.user.subscribe(user => {
       if (user != null) {
+
+        event.uid = user.uid;
         from(this.firestore.collection(`users/${user.uid}/reservation`).add({
           reservationDetails: event,
           uid: user.uid,
           month: event.month,
+          date: event.start.getDate(),
           year: event.year
         } as ReservationData)).subscribe(next => {
           this.addReservationToGlobal(next.id, event).subscribe(val => obs.next(next.id));
@@ -41,6 +44,8 @@ export class AdminService {
     const obs: Subject<any> = new Subject<any>();
 
     this.authService.user.subscribe(user => {
+
+      event.uid = user.uid;
       if (user != null) {
         from(this.firestore.collection(`reservation`).doc(userDocId).set({
           reservationDetails: event,
@@ -165,12 +170,21 @@ export class AdminService {
   }
 
 
-  markAsComplete(docId, event) {
+  markAsComplete(docId, event: MyCalenderEvent) {
     const obs: Subject<any> = new Subject<any>();
+
+    console.log(event.docId);
 
     this.authService.user.subscribe(user => {
       if (user != null) {
         from(this.firestore.collection(`reservation`).doc(docId).update(
+          {
+            reservationDetails: event,
+            completed: true
+          }
+        )).subscribe(next => obs.next('completed'));
+
+        from(this.firestore.collection(`users/${event.uid}/reservation`).doc(docId).update(
           {
             reservationDetails: event,
             completed: true
