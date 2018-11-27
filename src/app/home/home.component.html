@@ -2,18 +2,23 @@
 <section>
   <mdb-carousel [isControls]="true" [animation]="'slide'">
     <!--First slide-->
-    <mdb-carousel-item>
-      <img class="d-block w-100" src="https://mdbootstrap.com/img/Photos/Slides/img%20(130).jpg" alt="First slide">
-    </mdb-carousel-item>
+    <div class="view">
+      <mdb-carousel-item>
+        <img class="d-block w-100" src="assets/1.jpg" alt="First slide">
+      </mdb-carousel-item>
+      <div class="mask flex-center rgba-black-light">
+        <p class="white-text">strong overlay</p>
+      </div>
+    </div>
     <!--/First slide-->
     <!--Second slide-->
     <mdb-carousel-item>
-      <img class="d-block w-100" src="https://mdbootstrap.com/img/Photos/Slides/img%20(129).jpg" alt="Second slide">
+      <img class="d-block w-100" src="assets/2.jpg" alt="Second slide">
     </mdb-carousel-item>
     <!--/Second slide-->
     <!--Third slide-->
     <mdb-carousel-item>
-      <img class="d-block w-100" src="https://mdbootstrap.com/img/Photos/Slides/img%20(70).jpg" alt="Third slide">
+      <img class="d-block w-100" src="assets/3.jpg" alt="Third slide">
     </mdb-carousel-item>
     <!--/Third slide-->
   </mdb-carousel>
