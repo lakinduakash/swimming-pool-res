@@ -9,11 +9,14 @@ export class ButtonWaterComponent implements OnInit {
 
   @Input('text')
   buttonText: string;
+  @Input('disabled')
+  disabled = false;
 
   @Input('width')
   width = '50px';
   @Output('clickButton')
   click: EventEmitter<any> = new EventEmitter<any>();
+
 
   constructor() {
   }

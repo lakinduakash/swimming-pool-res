@@ -1,5 +1,5 @@
-<div class="buttons" (click)="clickButton()">
-  <button class="blob-btn" [style.width]="width">
+<div class="buttons">
+  <button class="blob-btn" [style.width]="width" (click)="clickButton()" [disabled]="disabled">
     {{buttonText}}
     <span class="blob-btn__inner">
       <span class="blob-btn__blobs">
