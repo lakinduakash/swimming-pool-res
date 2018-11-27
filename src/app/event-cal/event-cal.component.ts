@@ -101,6 +101,7 @@ export class EventCalComponent implements OnInit {
 
   ngOnInit() {
     this.loadAllUserEvents();
+    this.reservationService.getUserReservationForMonth(2018, 10).subscribe(next => console.log(next));
   }
 
   dayClicked({date, events}: { date: Date; events: CalendarEvent[] }): void {
@@ -133,13 +134,16 @@ export class EventCalComponent implements OnInit {
     this.modal.open(this.modalContent, {size: 'lg'});
   }
 
-  addEvent(): MyCalenderEvent[] {
+  addEvent(): { tempEvents, newEvent } {
 
     const tempEvents = [];
     const startDate = this.startDate;
-    tempEvents.push({
+
+    const newEvent = {
       title: this.peopleCount + ' people,   @ ' + this.startDate.getHours() + ':' + this.startDate.getMinutes() + '  , duration: ' +
         this.hourSelector.value + ' Hour',
+      year: this.startDate.getFullYear(),
+      month: this.startDate.getMonth(),
       start: this.startDate,
       end: new Date(startDate.getUTCFullYear(), startDate.getMonth(), startDate.getDate(),
         startDate.getHours() + Number(this.hourSelector.value), startDate.getMinutes()),
@@ -152,23 +156,24 @@ export class EventCalComponent implements OnInit {
         beforeStart: false,
         afterEnd: true
       }
-    });
+    } as MyCalenderEvent
+    tempEvents.push(newEvent);
 
 
-    return tempEvents.concat(this.events);
+    return {tempEvents: tempEvents.concat(this.events), newEvent: newEvent};
   }
 
 
   saveReservation() {
 
-    const tempEvents = this.addEvent();
+    const newEventDetails = this.addEvent();
 
     this.reserving = true;
-    this.reservationService.addReservationToUser(this.startDate.getFullYear(), this.startDate.getMonth(), tempEvents).subscribe(next => {
+    this.reservationService.addReservationToUser(newEventDetails.newEvent).subscribe(next => {
         this.eventsLoadingForMonth = false;
         this.reserving = false;
 
-        this.events = tempEvents;
+        this.events = newEventDetails.tempEvents;
         this.refresh.next();
 
         this.openSnackBar('Reservation added', 'Okay');
@@ -193,7 +198,8 @@ export class EventCalComponent implements OnInit {
               duration: a.duration,
               color: a.color,
               draggable: a.draggable,
-              resizable: a.resizable
+              resizable: a.resizable,
+              docId: a.docId
             };
 
             this.events.push(temp);
@@ -211,14 +217,13 @@ export class EventCalComponent implements OnInit {
 
   }
 
-  cancelReservation(year, month, events) {
-
-    this.reservationService.updateReservation(year, month, events).subscribe(
+  cancelReservation(docId) {
+    this.reservationService.deleteUserReservation(docId).subscribe(
       next => {
         console.log('canceled');
         this.openSnackBar('Reservation canceled', 'Okay');
       },
-      error1 => console.log('error ocurred')
+      error1 => console.log('error occurred')
     );
   }
 
@@ -238,10 +243,14 @@ export class EventCalComponent implements OnInit {
 
 
 export class MyCalenderEvent implements CalendarEvent {
+  uid?;
+  docId?;
   start;
   title;
   end?;
   package?;
+  year?;
+  month?;
   peopleCount?;
   duration?;
   color?: any;
